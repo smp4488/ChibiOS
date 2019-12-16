@@ -54,7 +54,7 @@
    asm module.*/
 #if !defined(_FROM_ASM_)
 
-// #include "board.h"
+#include "board.h"
 
 /* Including the device CMSIS header. Note, we are not using the definitions
    from this header because we need this file to be usable also from

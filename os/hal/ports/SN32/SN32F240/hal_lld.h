@@ -74,11 +74,13 @@
 /* Various helpers.*/
 #include "nvic.h"
 #include "sn32_isr.h"
+// #include "sn32_rcc.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
   void hal_lld_init(void);
+  void sn32_clock_init(void);
 #ifdef __cplusplus
 }
 #endif

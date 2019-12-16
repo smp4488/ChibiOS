@@ -49,6 +49,17 @@
 /*===========================================================================*/
 
 /**
+ * @brief   STM32L4xx clocks and PLL initialization.
+ * @note    All the involved constants come from the file @p board.h.
+ * @note    This function should be invoked just after the system reset.
+ *
+ * @special
+ */
+void sn32_clock_init(void) {
+
+}
+
+/**
  * @brief   Low level HAL driver initialization.
  *
  * @notapi

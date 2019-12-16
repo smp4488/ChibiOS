@@ -15,8 +15,8 @@
 */
 
 /**
- * @file    SN32F240/sn32_registry.h
- * @brief   SN32F240 capabilities registry.
+ * @file    SN32F240B/sn32_registry.h
+ * @brief   SN32F240B capabilities registry.
  *
  * @addtogroup HAL
  * @{
@@ -25,8 +25,8 @@
 #ifndef SN32_REGISTRY_H
 #define SN32_REGISTRY_H
 
-#if !defined(SN32F240) || defined(__DOXYGEN__)
-#define SN32F240
+#if !defined(SN32F240B) || defined(__DOXYGEN__)
+#define SN32F240B
 #endif
 
 /*===========================================================================*/
@@ -34,14 +34,14 @@
 /*===========================================================================*/
 
 /**
- * @name    SN32F240 capabilities
+ * @name    SN32F240B capabilities
  * @{
  */
 
 /*===========================================================================*/
 /* SN32F091xC, SN32F098xx.                                                 */
 /*===========================================================================*/
-#if defined(SN32F240)
+#if defined(SN32F240B)
 
 /* RCC attributes. */
 #define SN32_HAS_HSI48                     TRUE
@@ -135,7 +135,7 @@
 #define SN32_HAS_GPIOC                     TRUE
 #define SN32_HAS_GPIOD                     TRUE
 #define SN32_HAS_GPIOE                     FALSE
-#define SN32_HAS_GPIOF                     TRUE
+#define SN32_HAS_GPIOF                     FALSE
 #define SN32_HAS_GPIOG                     FALSE
 #define SN32_HAS_GPIOH                     FALSE
 #define SN32_HAS_GPIOI                     FALSE
@@ -392,6 +392,7 @@
 
 /* USB attributes.*/
 #define SN32_HAS_USB                       TRUE
+#define SN32_USB_PMA_SIZE                  512
 #define SN32_HAS_OTG1                      FALSE
 #define SN32_HAS_OTG2                      FALSE
 #define SN32_USBCLK                        48000000
