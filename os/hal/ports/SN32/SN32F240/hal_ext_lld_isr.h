@@ -15,49 +15,76 @@
 */
 
 /**
- * @file    hal_lld.h
- * @brief   PLATFORM HAL subsystem low level driver header.
+ * @file    SN32F0xx/hal_ext_lld_isr.h
+ * @brief   SN32F0xx EXT subsystem low level driver ISR header.
  *
- * @addtogroup HAL
+ * @addtogroup EXT
  * @{
  */
 
-#ifndef _HAL_LLD_H_
-#define _HAL_LLD_H_
+#ifndef HAL_EXT_LLD_ISR_H
+#define HAL_EXT_LLD_ISR_H
+
+#if HAL_USE_EXT || defined(__DOXYGEN__)
 
 /*===========================================================================*/
 /* Driver constants.                                                         */
 /*===========================================================================*/
-
-#include "sn32_registry.h"
-
-/**
- * @name    Platform identification macros
- * @{
- */
-#define PLATFORM_NAME           "templates"
-/** @} */
 
 /*===========================================================================*/
 /* Driver pre-compile time settings.                                         */
 /*===========================================================================*/
 
 /**
- * @name    PLATFORM configuration options
+ * @name    Configuration options
  * @{
  */
+/**
+ * @brief   EXTI0..1 interrupt priority level setting.
+ */
+#if !defined(SN32_EXT_EXTI0_1_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define SN32_EXT_EXTI0_1_IRQ_PRIORITY      3
+#endif
+
+/**
+ * @brief   EXTI2..3 interrupt priority level setting.
+ */
+#if !defined(SN32_EXT_EXTI2_3_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define SN32_EXT_EXTI2_3_IRQ_PRIORITY      3
+#endif
+
+/**
+ * @brief   EXTI4..15 interrupt priority level setting.
+ */
+#if !defined(SN32_EXT_EXTI4_15_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define SN32_EXT_EXTI4_15_IRQ_PRIORITY     3
+#endif
+
+/**
+ * @brief   EXTI16 interrupt priority level setting.
+ */
+#if !defined(SN32_EXT_EXTI16_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define SN32_EXT_EXTI16_IRQ_PRIORITY       3
+#endif
+
+/**
+ * @brief   EXTI17,19,20 interrupt priority level setting.
+ */
+#if !defined(SN32_EXT_EXTI17_20_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define SN32_EXT_EXTI17_20_IRQ_PRIORITY    3
+#endif
+
+/**
+ * @brief   EXTI21,22 interrupt priority level setting.
+ */
+#if !defined(SN32_EXT_EXTI21_22_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define SN32_EXT_EXTI21_22_IRQ_PRIORITY    3
+#endif
 /** @} */
 
 /*===========================================================================*/
 /* Derived constants and error checks.                                       */
 /*===========================================================================*/
-
-/*
- * Configuration-related checks.
- */
-#if !defined(PLATFORM_MCUCONF)
-#error "Using a wrong mcuconf.h file, PLATFORM_MCUCONF not defined"
-#endif
 
 /*===========================================================================*/
 /* Driver data structures and types.                                         */
@@ -71,18 +98,17 @@
 /* External declarations.                                                    */
 /*===========================================================================*/
 
-/* Various helpers.*/
-#include "nvic.h"
-#include "sn32_isr.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif
-  void hal_lld_init(void);
+  void ext_lld_exti_irq_enable(void);
+  void ext_lld_exti_irq_disable(void);
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* _HAL_LLD_H_ */
+#endif /* HAL_USE_EXT */
+
+#endif /* HAL_EXT_LLD_ISR_H */
 
 /** @} */

@@ -141,15 +141,15 @@ typedef enum {
 
 
 /* =========================================================================================================================== */
-/* ================                                          SN_SYS0                                          ================ */
+/* ================                                          SYS0                                          ================ */
 /* =========================================================================================================================== */
 
 
 /**
-  * @brief System Control Registers (SN_SYS0)
+  * @brief System Control Registers (SYS0)
   */
 
-typedef struct {                                /*!< (@ 0x40060000) SN_SYS0 Structure                                          */
+typedef struct {                                /*!< (@ 0x40060000) SYS0 Structure                                          */
 
   union {
     __IOM uint32_t ANBCTRL;                     /*!< (@ 0x00000000) Offset:0x00 Analog Block Control Register                  */
@@ -262,20 +262,20 @@ typedef struct {                                /*!< (@ 0x40060000) SN_SYS0 Stru
       __IOM uint32_t AEFT       : 3;            /*!< [2..0] Anti-EFT ability                                                   */
     } ANTIEFT_b;
   } ;
-} SN_SYS0_Type;                                 /*!< Size = 52 (0x34)                                                          */
+} SYS0_Type;                                 /*!< Size = 52 (0x34)                                                          */
 
 
 
 /* =========================================================================================================================== */
-/* ================                                          SN_SYS1                                          ================ */
+/* ================                                          SYS1                                          ================ */
 /* =========================================================================================================================== */
 
 
 /**
-  * @brief System Control Registers (SN_SYS1)
+  * @brief System Control Registers (SYS1)
   */
 
-typedef struct {                                /*!< (@ 0x4005E000) SN_SYS1 Structure                                          */
+typedef struct {                                /*!< (@ 0x4005E000) SYS1 Structure                                          */
 
   union {
     __IOM uint32_t AHBCLKEN;                    /*!< (@ 0x00000000) Offset:0x00 AHB Clock Enable Register                      */
@@ -316,20 +316,20 @@ typedef struct {                                /*!< (@ 0x4005E000) SN_SYS1 Stru
       __IOM uint32_t CLKOUTPRE  : 3;            /*!< [30..28] CLKOUT APB clock source prescaler                                */
     } APBCP1_b;
   } ;
-} SN_SYS1_Type;                                 /*!< Size = 12 (0xc)                                                           */
+} SYS1_Type;                                 /*!< Size = 12 (0xc)                                                           */
 
 
 
 /* =========================================================================================================================== */
-/* ================                                          SN_PMU                                           ================ */
+/* ================                                          PMU                                           ================ */
 /* =========================================================================================================================== */
 
 
 /**
-  * @brief Power Management Unit (SN_PMU)
+  * @brief Power Management Unit (PMU)
   */
 
-typedef struct {                                /*!< (@ 0x40032000) SN_PMU Structure                                           */
+typedef struct {                                /*!< (@ 0x40032000) PMU Structure                                           */
   __IM  uint32_t  RESERVED[16];
 
   union {
@@ -339,20 +339,20 @@ typedef struct {                                /*!< (@ 0x40032000) SN_PMU Struc
       __IOM uint32_t MODE       : 3;            /*!< [2..0] Low Power mode selection                                           */
     } CTRL_b;
   } ;
-} SN_PMU_Type;                                  /*!< Size = 68 (0x44)                                                          */
+} PMU_Type;                                  /*!< Size = 68 (0x44)                                                          */
 
 
 
 /* =========================================================================================================================== */
-/* ================                                          SN_PFPA                                          ================ */
+/* ================                                          PFPA                                          ================ */
 /* =========================================================================================================================== */
 
 
 /**
-  * @brief Peripheral Function Pin Assignment (SN_PFPA)
+  * @brief Peripheral Function Pin Assignment (PFPA)
   */
 
-typedef struct {                                /*!< (@ 0x40042000) SN_PFPA Structure                                          */
+typedef struct {                                /*!< (@ 0x40042000) PFPA Structure                                          */
 
   union {
     __IOM uint32_t CT16B1;                      /*!< (@ 0x00000000) Offset:0x00 PFPA for CT16B1 Register                       */
@@ -384,20 +384,20 @@ typedef struct {                                /*!< (@ 0x40042000) SN_PFPA Stru
       __IOM uint32_t PWM23      : 1;            /*!< [23..23] CT16B1_PWM23 assigned pin                                        */
     } CT16B1_b;
   } ;
-} SN_PFPA_Type;                                 /*!< Size = 4 (0x4)                                                            */
+} PFPA_Type;                                 /*!< Size = 4 (0x4)                                                            */
 
 
 
 /* =========================================================================================================================== */
-/* ================                                         SN_GPIO0                                          ================ */
+/* ================                                         GPIOA                                          ================ */
 /* =========================================================================================================================== */
 
 
 /**
-  * @brief General Purpose I/O (SN_GPIO0)
+  * @brief General Purpose I/O (GPIOA)
   */
 
-typedef struct {                                /*!< (@ 0x40044000) SN_GPIO0 Structure                                         */
+typedef struct {                                /*!< (@ 0x40044000) GPIOA Structure                                         */
 
   union {
     __IOM uint32_t DATA;                        /*!< (@ 0x00000000) Offset:0x00 GPIO Port n Data Register                      */
@@ -654,20 +654,20 @@ typedef struct {                                /*!< (@ 0x40044000) SN_GPIO0 Str
       __OM  uint32_t BCLR15     : 1;            /*!< [15..15] Clear Pn.15                                                      */
     } BCLR_b;
   } ;
-} SN_GPIO0_Type;                                /*!< Size = 44 (0x2c)                                                          */
+} GPIOA_Type;                                /*!< Size = 44 (0x2c)                                                          */
 
 
 
 /* =========================================================================================================================== */
-/* ================                                         SN_GPIO3                                          ================ */
+/* ================                                         GPIOD                                          ================ */
 /* =========================================================================================================================== */
 
 
 /**
-  * @brief General Purpose I/O (SN_GPIO3)
+  * @brief General Purpose I/O (GPIOD)
   */
 
-typedef struct {                                /*!< (@ 0x4004A000) SN_GPIO3 Structure                                         */
+typedef struct {                                /*!< (@ 0x4004A000) GPIOD Structure                                         */
 
   union {
     __IOM uint32_t DATA;                        /*!< (@ 0x00000000) Offset:0x00 GPIO Port n Data Register                      */
@@ -858,20 +858,20 @@ typedef struct {                                /*!< (@ 0x4004A000) SN_GPIO3 Str
       __OM  uint32_t BCLR11     : 1;            /*!< [11..11] Clear Pn.11                                                      */
     } BCLR_b;
   } ;
-} SN_GPIO3_Type;                                /*!< Size = 44 (0x2c)                                                          */
+} GPIOD_Type;                                /*!< Size = 44 (0x2c)                                                          */
 
 
 
 /* =========================================================================================================================== */
-/* ================                                          SN_ADC                                           ================ */
+/* ================                                          ADC                                           ================ */
 /* =========================================================================================================================== */
 
 
 /**
-  * @brief ADC (SN_ADC)
+  * @brief ADC (ADC)
   */
 
-typedef struct {                                /*!< (@ 0x40026000) SN_ADC Structure                                           */
+typedef struct {                                /*!< (@ 0x40026000) ADC Structure                                           */
 
   union {
     __IOM uint32_t ADM;                         /*!< (@ 0x00000000) Offset:0x00 ADC Management Register                        */
@@ -917,20 +917,20 @@ typedef struct {                                /*!< (@ 0x40026000) SN_ADC Struc
     } IE_b;
   } ;
   __IOM uint32_t  RIS;                          /*!< (@ 0x00000010) Offset:0x10 ADC Raw Interrupt Status Register              */
-} SN_ADC_Type;                                  /*!< Size = 20 (0x14)                                                          */
+} ADC_Type;                                  /*!< Size = 20 (0x14)                                                          */
 
 
 
 /* =========================================================================================================================== */
-/* ================                                         SN_CT16B0                                         ================ */
+/* ================                                         CT16B0                                         ================ */
 /* =========================================================================================================================== */
 
 
 /**
-  * @brief 16-bit Timer 0 with Capture function (SN_CT16B0)
+  * @brief 16-bit Timer 0 with Capture function (CT16B0)
   */
 
-typedef struct {                                /*!< (@ 0x40000000) SN_CT16B0 Structure                                        */
+typedef struct {                                /*!< (@ 0x40000000) CT16B0 Structure                                        */
 
   union {
     __IOM uint32_t TMRCTRL;                     /*!< (@ 0x00000000) Offset:0x00 CT16Bn Timer Control Register                  */
@@ -1026,20 +1026,20 @@ typedef struct {                                /*!< (@ 0x40000000) SN_CT16B0 St
       __OM  uint32_t CAP0IC     : 1;            /*!< [25..25] CAP0IF clear bit                                                 */
     } IC_b;
   } ;
-} SN_CT16B0_Type;                               /*!< Size = 172 (0xac)                                                         */
+} CT16B0_Type;                               /*!< Size = 172 (0xac)                                                         */
 
 
 
 /* =========================================================================================================================== */
-/* ================                                         SN_CT16B1                                         ================ */
+/* ================                                         CT16B1                                         ================ */
 /* =========================================================================================================================== */
 
 
 /**
-  * @brief 16-bit Timer 0 with Capture function (SN_CT16B1)
+  * @brief 16-bit Timer 0 with Capture function (CT16B1)
   */
 
-typedef struct {                                /*!< (@ 0x40002000) SN_CT16B1 Structure                                        */
+typedef struct {                                /*!< (@ 0x40002000) CT16B1 Structure                                        */
 
   union {
     __IOM uint32_t TMRCTRL;                     /*!< (@ 0x00000000) Offset:0x00 CT16Bn Timer Control Register                  */
@@ -1463,20 +1463,20 @@ typedef struct {                                /*!< (@ 0x40002000) SN_CT16B1 St
       __OM  uint32_t MR24IC     : 1;            /*!< [24..24] MR24IF clear bit                                                 */
     } IC_b;
   } ;
-} SN_CT16B1_Type;                               /*!< Size = 172 (0xac)                                                         */
+} CT16B1_Type;                               /*!< Size = 172 (0xac)                                                         */
 
 
 
 /* =========================================================================================================================== */
-/* ================                                          SN_WDT                                           ================ */
+/* ================                                          WDT                                           ================ */
 /* =========================================================================================================================== */
 
 
 /**
-  * @brief Watchdog Timer (SN_WDT)
+  * @brief Watchdog Timer (WDT)
   */
 
-typedef struct {                                /*!< (@ 0x40010000) SN_WDT Structure                                           */
+typedef struct {                                /*!< (@ 0x40010000) WDT Structure                                           */
 
   union {
     __IOM uint32_t CFG;                         /*!< (@ 0x00000000) Offset:0x00 WDT Configuration Register                     */
@@ -1509,20 +1509,20 @@ typedef struct {                                /*!< (@ 0x40010000) SN_WDT Struc
       __OM  uint32_t WDKEY      : 16;           /*!< [31..16] WDT register key                                                 */
     } FEED_b;
   } ;
-} SN_WDT_Type;                                  /*!< Size = 16 (0x10)                                                          */
+} WDT_Type;                                  /*!< Size = 16 (0x10)                                                          */
 
 
 
 /* =========================================================================================================================== */
-/* ================                                          SN_SPI0                                          ================ */
+/* ================                                          SPI0                                          ================ */
 /* =========================================================================================================================== */
 
 
 /**
-  * @brief SPI0 (SN_SPI0)
+  * @brief SPI0 (SPI0)
   */
 
-typedef struct {                                /*!< (@ 0x4001C000) SN_SPI0 Structure                                          */
+typedef struct {                                /*!< (@ 0x4001C000) SPI0 Structure                                          */
 
   union {
     __IOM uint32_t CTRL0;                       /*!< (@ 0x00000000) Offset:0x00 SPI0 Control Register 0                        */
@@ -1622,20 +1622,20 @@ typedef struct {                                /*!< (@ 0x4001C000) SN_SPI0 Stru
       __IOM uint32_t DFETCH_EN  : 1;            /*!< [0..0] SPI0 data fetch control bit                                        */
     } DFDLY_b;
   } ;
-} SN_SPI0_Type;                                 /*!< Size = 36 (0x24)                                                          */
+} SPI0_Type;                                 /*!< Size = 36 (0x24)                                                          */
 
 
 
 /* =========================================================================================================================== */
-/* ================                                          SN_I2C0                                          ================ */
+/* ================                                          I2C0                                          ================ */
 /* =========================================================================================================================== */
 
 
 /**
-  * @brief I2C0 (SN_I2C0)
+  * @brief I2C0 (I2C0)
   */
 
-typedef struct {                                /*!< (@ 0x40018000) SN_I2C0 Structure                                          */
+typedef struct {                                /*!< (@ 0x40018000) I2C0 Structure                                          */
 
   union {
     __IOM uint32_t CTRL;                        /*!< (@ 0x00000000) Offset:0x00 I2Cn Control Register                          */
@@ -1747,20 +1747,20 @@ typedef struct {                                /*!< (@ 0x40018000) SN_I2C0 Stru
       __IOM uint32_t TO         : 16;           /*!< [15..0] Timeout period time = TO*I2Cn_PCLK cycle                          */
     } TOCTRL_b;
   } ;
-} SN_I2C0_Type;                                 /*!< Size = 48 (0x30)                                                          */
+} I2C0_Type;                                 /*!< Size = 48 (0x30)                                                          */
 
 
 
 /* =========================================================================================================================== */
-/* ================                                         SN_UART0                                          ================ */
+/* ================                                         UART0                                          ================ */
 /* =========================================================================================================================== */
 
 
 /**
-  * @brief UART0 (SN_UART0)
+  * @brief UART0 (UART0)
   */
 
-typedef struct {                                /*!< (@ 0x40016000) SN_UART0 Structure                                         */
+typedef struct {                                /*!< (@ 0x40016000) UART0 Structure                                         */
 
   union {
     union {
@@ -1921,20 +1921,20 @@ typedef struct {                                /*!< (@ 0x40016000) SN_UART0 Str
       __IOM uint32_t HDEN       : 1;            /*!< [0..0] Half-duplex mode enable                                            */
     } HDEN_b;
   } ;
-} SN_UART0_Type;                                /*!< Size = 56 (0x38)                                                          */
+} UART0_Type;                                /*!< Size = 56 (0x38)                                                          */
 
 
 
 /* =========================================================================================================================== */
-/* ================                                         SN_UART1                                          ================ */
+/* ================                                         UART1                                          ================ */
 /* =========================================================================================================================== */
 
 
 /**
-  * @brief UART1 (SN_UART1)
+  * @brief UART1 (UART1)
   */
 
-typedef struct {                                /*!< (@ 0x40014000) SN_UART1 Structure                                         */
+typedef struct {                                /*!< (@ 0x40014000) UART1 Structure                                         */
 
   union {
     union {
@@ -2095,20 +2095,20 @@ typedef struct {                                /*!< (@ 0x40014000) SN_UART1 Str
       __IOM uint32_t HDEN       : 1;            /*!< [0..0] Half-duplex mode enable                                            */
     } HDEN_b;
   } ;
-} SN_UART1_Type;                                /*!< Size = 56 (0x38)                                                          */
+} UART1_Type;                                /*!< Size = 56 (0x38)                                                          */
 
 
 
 /* =========================================================================================================================== */
-/* ================                                         SN_UART2                                          ================ */
+/* ================                                         UART2                                          ================ */
 /* =========================================================================================================================== */
 
 
 /**
-  * @brief UART2 (SN_UART2)
+  * @brief UART2 (UART2)
   */
 
-typedef struct {                                /*!< (@ 0x40012000) SN_UART2 Structure                                         */
+typedef struct {                                /*!< (@ 0x40012000) UART2 Structure                                         */
 
   union {
     union {
@@ -2269,20 +2269,20 @@ typedef struct {                                /*!< (@ 0x40012000) SN_UART2 Str
       __IOM uint32_t HDEN       : 1;            /*!< [0..0] Half-duplex mode enable                                            */
     } HDEN_b;
   } ;
-} SN_UART2_Type;                                /*!< Size = 56 (0x38)                                                          */
+} UART2_Type;                                /*!< Size = 56 (0x38)                                                          */
 
 
 
 /* =========================================================================================================================== */
-/* ================                                          SN_USB                                           ================ */
+/* ================                                          USB                                           ================ */
 /* =========================================================================================================================== */
 
 
 /**
-  * @brief Universal Serial Bus Full Speed Device Interface (USB) (SN_USB)
+  * @brief Universal Serial Bus Full Speed Device Interface (USB) (USB)
   */
 
-typedef struct {                                /*!< (@ 0x4005C000) SN_USB Structure                                           */
+typedef struct {                                /*!< (@ 0x4005C000) USB Structure                                           */
 
   union {
     __IOM uint32_t INTEN;                       /*!< (@ 0x00000000) Offset:0x00 USB Interrupt Enable Register                  */
@@ -2597,20 +2597,20 @@ typedef struct {                                /*!< (@ 0x4005C000) SN_USB Struc
       __IOM uint32_t R_STATUS   : 1;            /*!< [1..1] WRead status of USB FIFO                                           */
     } RWSTATUS2_b;
   } ;
-} SN_USB_Type;                                  /*!< Size = 144 (0x90)                                                         */
+} USB_Type;                                  /*!< Size = 144 (0x90)                                                         */
 
 
 
 /* =========================================================================================================================== */
-/* ================                                         SN_FLASH                                          ================ */
+/* ================                                         FLASH                                          ================ */
 /* =========================================================================================================================== */
 
 
 /**
-  * @brief FLASH Memory Control Registers (SN_FLASH)
+  * @brief FLASH Memory Control Registers (FLASH)
   */
 
-typedef struct {                                /*!< (@ 0x40062000) SN_FLASH Structure                                         */
+typedef struct {                                /*!< (@ 0x40062000) FLASH Structure                                         */
 
   union {
     __IOM uint32_t LPCTRL;                      /*!< (@ 0x00000000) Offset:0x00 Flash Low Power Control Register               */
@@ -2655,23 +2655,23 @@ typedef struct {                                /*!< (@ 0x40062000) SN_FLASH Str
       __IM  uint32_t BootROM    : 16;           /*!< [31..16] Checksum of Boot ROM                                             */
     } CHKSUM_b;
   } ;
-} SN_FLASH_Type;                                /*!< Size = 24 (0x18)                                                          */
+} FLASH_Type;                                /*!< Size = 24 (0x18)                                                          */
 
 
 
 /* =========================================================================================================================== */
-/* ================                                           SN_UC                                           ================ */
+/* ================                                           UC                                           ================ */
 /* =========================================================================================================================== */
 
 
 /**
-  * @brief UC Registers (SN_UC)
+  * @brief UC Registers (UC)
   */
 
-typedef struct {                                /*!< (@ 0x1FFF2228) SN_UC Structure                                            */
+typedef struct {                                /*!< (@ 0x1FFF2228) UC Structure                                            */
   __IM  uint32_t  L4BYTE;                       /*!< (@ 0x00000000) Offset:0x00 UC Low 4 Byte Register                         */
   __IM  uint32_t  H4BYTE;                       /*!< (@ 0x00000004) Offset:0x04 UC High 4 Byte Register                        */
-} SN_UC_Type;                                   /*!< Size = 8 (0x8)                                                            */
+} UC_Type;                                   /*!< Size = 8 (0x8)                                                            */
 
 
 /** @} */ /* End of group Device_Peripheral_peripherals */
@@ -2686,26 +2686,26 @@ typedef struct {                                /*!< (@ 0x1FFF2228) SN_UC Struct
   * @{
   */
 
-#define SN_SYS0_BASE                0x40060000UL
-#define SN_SYS1_BASE                0x4005E000UL
-#define SN_PMU_BASE                 0x40032000UL
-#define SN_PFPA_BASE                0x40042000UL
-#define SN_GPIO0_BASE               0x40044000UL
-#define SN_GPIO1_BASE               0x40046000UL
-#define SN_GPIO2_BASE               0x40048000UL
-#define SN_GPIO3_BASE               0x4004A000UL
-#define SN_ADC_BASE                 0x40026000UL
-#define SN_CT16B0_BASE              0x40000000UL
-#define SN_CT16B1_BASE              0x40002000UL
-#define SN_WDT_BASE                 0x40010000UL
-#define SN_SPI0_BASE                0x4001C000UL
-#define SN_I2C0_BASE                0x40018000UL
-#define SN_UART0_BASE               0x40016000UL
-#define SN_UART1_BASE               0x40014000UL
-#define SN_UART2_BASE               0x40012000UL
-#define SN_USB_BASE                 0x4005C000UL
-#define SN_FLASH_BASE               0x40062000UL
-#define SN_UC_BASE                  0x1FFF2228UL
+#define SYS0_BASE                0x40060000UL
+#define SYS1_BASE                0x4005E000UL
+#define PMU_BASE                 0x40032000UL
+#define PFPA_BASE                0x40042000UL
+#define GPIOA_BASE               0x40044000UL
+#define GPIOB_BASE               0x40046000UL
+#define GPIOC_BASE               0x40048000UL
+#define GPIOD_BASE               0x4004A000UL
+#define ADC_BASE                 0x40026000UL
+#define CT16B0_BASE              0x40000000UL
+#define CT16B1_BASE              0x40002000UL
+#define WDT_BASE                 0x40010000UL
+#define SPI0_BASE                0x4001C000UL
+#define I2C0_BASE                0x40018000UL
+#define UART0_BASE               0x40016000UL
+#define UART1_BASE               0x40014000UL
+#define UART2_BASE               0x40012000UL
+#define USB_BASE                 0x4005C000UL
+#define FLASH_BASE               0x40062000UL
+#define UC_BASE                  0x1FFF2228UL
 
 /** @} */ /* End of group Device_Peripheral_peripheralAddr */
 
@@ -2719,26 +2719,26 @@ typedef struct {                                /*!< (@ 0x1FFF2228) SN_UC Struct
   * @{
   */
 
-#define SN_SYS0                     ((SN_SYS0_Type*)           SN_SYS0_BASE)
-#define SN_SYS1                     ((SN_SYS1_Type*)           SN_SYS1_BASE)
-#define SN_PMU                      ((SN_PMU_Type*)            SN_PMU_BASE)
-#define SN_PFPA                     ((SN_PFPA_Type*)           SN_PFPA_BASE)
-#define SN_GPIO0                    ((SN_GPIO0_Type*)          SN_GPIO0_BASE)
-#define SN_GPIO1                    ((SN_GPIO0_Type*)          SN_GPIO1_BASE)
-#define SN_GPIO2                    ((SN_GPIO0_Type*)          SN_GPIO2_BASE)
-#define SN_GPIO3                    ((SN_GPIO3_Type*)          SN_GPIO3_BASE)
-#define SN_ADC                      ((SN_ADC_Type*)            SN_ADC_BASE)
-#define SN_CT16B0                   ((SN_CT16B0_Type*)         SN_CT16B0_BASE)
-#define SN_CT16B1                   ((SN_CT16B1_Type*)         SN_CT16B1_BASE)
-#define SN_WDT                      ((SN_WDT_Type*)            SN_WDT_BASE)
-#define SN_SPI0                     ((SN_SPI0_Type*)           SN_SPI0_BASE)
-#define SN_I2C0                     ((SN_I2C0_Type*)           SN_I2C0_BASE)
-#define SN_UART0                    ((SN_UART0_Type*)          SN_UART0_BASE)
-#define SN_UART1                    ((SN_UART1_Type*)          SN_UART1_BASE)
-#define SN_UART2                    ((SN_UART2_Type*)          SN_UART2_BASE)
-#define SN_USB                      ((SN_USB_Type*)            SN_USB_BASE)
-#define SN_FLASH                    ((SN_FLASH_Type*)          SN_FLASH_BASE)
-#define SN_UC                       ((SN_UC_Type*)             SN_UC_BASE)
+#define SYS0                     ((SYS0_Type*)           SYS0_BASE)
+#define SYS1                     ((SYS1_Type*)           SYS1_BASE)
+#define PMU                      ((PMU_Type*)            PMU_BASE)
+#define PFPA                     ((PFPA_Type*)           PFPA_BASE)
+#define GPIOA                    ((GPIOA_Type*)          GPIOA_BASE)
+#define GPIOB                    ((GPIOA_Type*)          GPIOB_BASE)
+#define GPIOC                    ((GPIOA_Type*)          GPIOC_BASE)
+#define GPIOD                    ((GPIOD_Type*)          GPIOD_BASE)
+#define ADC                      ((ADC_Type*)            ADC_BASE)
+#define CT16B0                   ((CT16B0_Type*)         CT16B0_BASE)
+#define CT16B1                   ((CT16B1_Type*)         CT16B1_BASE)
+#define WDT                      ((WDT_Type*)            WDT_BASE)
+#define SPI0                     ((SPI0_Type*)           SPI0_BASE)
+#define I2C0                     ((I2C0_Type*)           I2C0_BASE)
+#define UART0                    ((UART0_Type*)          UART0_BASE)
+#define UART1                    ((UART1_Type*)          UART1_BASE)
+#define UART2                    ((UART2_Type*)          UART2_BASE)
+#define USB                      ((USB_Type*)            USB_BASE)
+#define FLASH                    ((FLASH_Type*)          FLASH_BASE)
+#define UC                       ((UC_Type*)             UC_BASE)
 
 /** @} */ /* End of group Device_Peripheral_declaration */
 

@@ -85,7 +85,7 @@ typedef struct {
   uint32_t              mode;
   /**
    * @brief Channel callback.
-   * @details  In the STM32 implementation a @p NULL callback pointer is
+   * @details  In the SN32 implementation a @p NULL callback pointer is
    *           valid and configures the channel as an event sources instead
    *           of an interrupt source.
    */

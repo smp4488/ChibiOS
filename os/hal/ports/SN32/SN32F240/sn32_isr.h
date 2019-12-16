@@ -15,49 +15,91 @@
 */
 
 /**
- * @file    hal_lld.h
- * @brief   PLATFORM HAL subsystem low level driver header.
+ * @file    SN32F0xx/sn32_isr.h
+ * @brief   ISR remapper driver header.
  *
- * @addtogroup HAL
+ * @addtogroup SN32F0xx_ISR
  * @{
  */
 
-#ifndef _HAL_LLD_H_
-#define _HAL_LLD_H_
+#ifndef SN32_ISR_H
+#define SN32_ISR_H
 
 /*===========================================================================*/
 /* Driver constants.                                                         */
 /*===========================================================================*/
 
-#include "sn32_registry.h"
-
 /**
- * @name    Platform identification macros
+ * @name    ISR names and numbers remapping
  * @{
  */
-#define PLATFORM_NAME           "templates"
+/*
+ * CAN units.
+ */
+#define SN32_CAN1_UNIFIED_HANDLER  VectorB8
+#define SN32_CAN1_UNIFIED_NUMBER   30
+
+/*
+ * I2C units.
+ */
+#define SN32_I2C1_GLOBAL_HANDLER   Vector9C
+#define SN32_I2C1_GLOBAL_NUMBER    23
+
+#define SN32_I2C2_GLOBAL_HANDLER   VectorA0
+#define SN32_I2C2_GLOBAL_NUMBER    24
+
+/*
+ * TIM units.
+ */
+#define SN32_TIM1_UP_HANDLER       Vector74
+#define SN32_TIM1_CC_HANDLER       Vector78
+#define SN32_TIM2_HANDLER          Vector7C
+#define SN32_TIM3_HANDLER          Vector80
+#define SN32_TIM6_HANDLER          Vector84
+#define SN32_TIM7_HANDLER          Vector88
+#define SN32_TIM14_HANDLER         Vector8C
+#define SN32_TIM15_HANDLER         Vector90
+#define SN32_TIM16_HANDLER         Vector94
+#define SN32_TIM17_HANDLER         Vector98
+
+#define SN32_TIM1_UP_NUMBER        13
+#define SN32_TIM1_CC_NUMBER        14
+#define SN32_TIM2_NUMBER           15
+#define SN32_TIM3_NUMBER           16
+#define SN32_TIM6_NUMBER           17
+#define SN32_TIM7_NUMBER           18
+#define SN32_TIM14_NUMBER          19
+#define SN32_TIM15_NUMBER          20
+#define SN32_TIM16_NUMBER          21
+#define SN32_TIM17_NUMBER          22
+
+/*
+ * USART units.
+ */
+#define SN32_USART1_HANDLER        VectorAC
+#define SN32_USART2_HANDLER        VectorB0
+#define SN32_USART3_8_HANDLER      VectorB4
+
+#define SN32_USART1_NUMBER         27
+#define SN32_USART2_NUMBER         28
+#define SN32_USART3_8_NUMBER       29
+
+/*
+ * USB units.
+ */
+#define SN32_USB1_LP_HANDLER       VectorBC
+#define SN32_USB1_LP_NUMBER        31
+#define SN32_USB1_HP_HANDLER       VectorBC
+#define SN32_USB1_HP_NUMBER        31
 /** @} */
 
 /*===========================================================================*/
 /* Driver pre-compile time settings.                                         */
 /*===========================================================================*/
 
-/**
- * @name    PLATFORM configuration options
- * @{
- */
-/** @} */
-
 /*===========================================================================*/
 /* Derived constants and error checks.                                       */
 /*===========================================================================*/
-
-/*
- * Configuration-related checks.
- */
-#if !defined(PLATFORM_MCUCONF)
-#error "Using a wrong mcuconf.h file, PLATFORM_MCUCONF not defined"
-#endif
 
 /*===========================================================================*/
 /* Driver data structures and types.                                         */
@@ -71,18 +113,6 @@
 /* External declarations.                                                    */
 /*===========================================================================*/
 
-/* Various helpers.*/
-#include "nvic.h"
-#include "sn32_isr.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-  void hal_lld_init(void);
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* _HAL_LLD_H_ */
+#endif /* SN32_ISR_H */
 
 /** @} */

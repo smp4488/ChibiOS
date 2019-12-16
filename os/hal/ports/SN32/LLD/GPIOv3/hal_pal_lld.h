@@ -16,7 +16,7 @@
 
 /**
  * @file    GPIOv3/hal_pal_lld.h
- * @brief   STM32 PAL low level driver header.
+ * @brief   SN32 PAL low level driver header.
  *
  * @addtogroup PAL
  * @{
@@ -41,48 +41,48 @@
 #undef PAL_MODE_OUTPUT_OPENDRAIN
 
 /**
- * @name    STM32-specific I/O mode flags
+ * @name    SN32-specific I/O mode flags
  * @{
  */
-#define PAL_STM32_MODE_MASK             (3U << 0U)
-#define PAL_STM32_MODE_INPUT            (0U << 0U)
-#define PAL_STM32_MODE_OUTPUT           (1U << 0U)
-#define PAL_STM32_MODE_ALTERNATE        (2U << 0U)
-#define PAL_STM32_MODE_ANALOG           (3U << 0U)
+#define PAL_SN32_MODE_MASK             (3U << 0U)
+#define PAL_SN32_MODE_INPUT            (0U << 0U)
+#define PAL_SN32_MODE_OUTPUT           (1U << 0U)
+#define PAL_SN32_MODE_ALTERNATE        (2U << 0U)
+#define PAL_SN32_MODE_ANALOG           (3U << 0U)
 
-#define PAL_STM32_OTYPE_MASK            (1U << 2U)
-#define PAL_STM32_OTYPE_PUSHPULL        (0U << 2U)
-#define PAL_STM32_OTYPE_OPENDRAIN       (1U << 2U)
+#define PAL_SN32_OTYPE_MASK            (1U << 2U)
+#define PAL_SN32_OTYPE_PUSHPULL        (0U << 2U)
+#define PAL_SN32_OTYPE_OPENDRAIN       (1U << 2U)
 
-#define PAL_STM32_OSPEED_MASK           (3U << 3U)
-#define PAL_STM32_OSPEED_LOW            (0U << 3U)
-#define PAL_STM32_OSPEED_MEDIUM         (1U << 3U)
-#define PAL_STM32_OSPEED_FAST           (2U << 3U)
-#define PAL_STM32_OSPEED_HIGH           (3U << 3U)
+#define PAL_SN32_OSPEED_MASK           (3U << 3U)
+#define PAL_SN32_OSPEED_LOW            (0U << 3U)
+#define PAL_SN32_OSPEED_MEDIUM         (1U << 3U)
+#define PAL_SN32_OSPEED_FAST           (2U << 3U)
+#define PAL_SN32_OSPEED_HIGH           (3U << 3U)
 
-#define PAL_STM32_PUPDR_MASK            (3U << 5U)
-#define PAL_STM32_PUPDR_FLOATING        (0U << 5U)
-#define PAL_STM32_PUPDR_PULLUP          (1U << 5U)
-#define PAL_STM32_PUPDR_PULLDOWN        (2U << 5U)
+#define PAL_SN32_PUPDR_MASK            (3U << 5U)
+#define PAL_SN32_PUPDR_FLOATING        (0U << 5U)
+#define PAL_SN32_PUPDR_PULLUP          (1U << 5U)
+#define PAL_SN32_PUPDR_PULLDOWN        (2U << 5U)
 
-#define PAL_STM32_ALTERNATE_MASK        (15U << 7U)
-#define PAL_STM32_ALTERNATE(n)          ((n) << 7U)
+#define PAL_SN32_ALTERNATE_MASK        (15U << 7U)
+#define PAL_SN32_ALTERNATE(n)          ((n) << 7U)
 
-#define PAL_STM32_ASCR_MASK             (1U << 11U)
-#define PAL_STM32_ASCR_OFF              (0U << 11U)
-#define PAL_STM32_ASCR_ON               (1U << 11U)
+#define PAL_SN32_ASCR_MASK             (1U << 11U)
+#define PAL_SN32_ASCR_OFF              (0U << 11U)
+#define PAL_SN32_ASCR_ON               (1U << 11U)
 
-#define PAL_STM32_LOCKR_MASK            (1U << 12U)
-#define PAL_STM32_LOCKR_OFF             (0U << 12U)
-#define PAL_STM32_LOCKR_ON              (1U << 12U)
+#define PAL_SN32_LOCKR_MASK            (1U << 12U)
+#define PAL_SN32_LOCKR_OFF             (0U << 12U)
+#define PAL_SN32_LOCKR_ON              (1U << 12U)
 
 /**
  * @brief   Alternate function.
  *
  * @param[in] n         alternate function selector
  */
-#define PAL_MODE_ALTERNATE(n)           (PAL_STM32_MODE_ALTERNATE |         \
-                                         PAL_STM32_ALTERNATE(n))
+#define PAL_MODE_ALTERNATE(n)           (PAL_SN32_MODE_ALTERNATE |         \
+                                         PAL_SN32_ALTERNATE(n))
 /** @} */
 
 /**
@@ -92,49 +92,49 @@
 /**
  * @brief   Implemented as input.
  */
-#define PAL_MODE_RESET                  PAL_STM32_MODE_INPUT
+#define PAL_MODE_RESET                  PAL_SN32_MODE_INPUT
 
 /**
  * @brief   Implemented as analog with analog switch disabled and lock.
  */
-#define PAL_MODE_UNCONNECTED            (PAL_STM32_MODE_ANALOG |            \
-                                         PAL_STM32_ASCR_OFF |               \
-                                         PAL_STM32_LOCKR_ON)
+#define PAL_MODE_UNCONNECTED            (PAL_SN32_MODE_ANALOG |            \
+                                         PAL_SN32_ASCR_OFF |               \
+                                         PAL_SN32_LOCKR_ON)
 
 /**
  * @brief   Regular input high-Z pad.
  */
-#define PAL_MODE_INPUT                  PAL_STM32_MODE_INPUT
+#define PAL_MODE_INPUT                  PAL_SN32_MODE_INPUT
 
 /**
  * @brief   Input pad with weak pull up resistor.
  */
-#define PAL_MODE_INPUT_PULLUP           (PAL_STM32_MODE_INPUT |             \
-                                         PAL_STM32_PUPDR_PULLUP)
+#define PAL_MODE_INPUT_PULLUP           (PAL_SN32_MODE_INPUT |             \
+                                         PAL_SN32_PUPDR_PULLUP)
 
 /**
  * @brief   Input pad with weak pull down resistor.
  */
-#define PAL_MODE_INPUT_PULLDOWN         (PAL_STM32_MODE_INPUT |             \
-                                         PAL_STM32_PUPDR_PULLDOWN)
+#define PAL_MODE_INPUT_PULLDOWN         (PAL_SN32_MODE_INPUT |             \
+                                         PAL_SN32_PUPDR_PULLDOWN)
 
 /**
  * @brief   Analog input mode.
  */
-#define PAL_MODE_INPUT_ANALOG           (PAL_STM32_MODE_ANALOG |            \
-                                         PAL_STM32_ASCR_ON)
+#define PAL_MODE_INPUT_ANALOG           (PAL_SN32_MODE_ANALOG |            \
+                                         PAL_SN32_ASCR_ON)
 
 /**
  * @brief   Push-pull output pad.
  */
-#define PAL_MODE_OUTPUT_PUSHPULL        (PAL_STM32_MODE_OUTPUT |            \
-                                         PAL_STM32_OTYPE_PUSHPULL)
+#define PAL_MODE_OUTPUT_PUSHPULL        (PAL_SN32_MODE_OUTPUT |            \
+                                         PAL_SN32_OTYPE_PUSHPULL)
 
 /**
  * @brief   Open-drain output pad.
  */
-#define PAL_MODE_OUTPUT_OPENDRAIN       (PAL_STM32_MODE_OUTPUT |            \
-                                         PAL_STM32_OTYPE_OPENDRAIN)
+#define PAL_MODE_OUTPUT_OPENDRAIN       (PAL_SN32_MODE_OUTPUT |            \
+                                         PAL_SN32_OTYPE_OPENDRAIN)
 /** @} */
 
 /* Discarded definitions from the ST headers, the PAL driver uses its own
@@ -157,17 +157,17 @@
  * @name    GPIO ports definitions
  * @{
  */
-#define GPIOA                           ((stm32_gpio_t *)GPIOA_BASE)
-#define GPIOB                           ((stm32_gpio_t *)GPIOB_BASE)
-#define GPIOC                           ((stm32_gpio_t *)GPIOC_BASE)
-#define GPIOD                           ((stm32_gpio_t *)GPIOD_BASE)
-#define GPIOE                           ((stm32_gpio_t *)GPIOE_BASE)
-#define GPIOF                           ((stm32_gpio_t *)GPIOF_BASE)
-#define GPIOG                           ((stm32_gpio_t *)GPIOG_BASE)
-#define GPIOH                           ((stm32_gpio_t *)GPIOH_BASE)
-#define GPIOI                           ((stm32_gpio_t *)GPIOI_BASE)
-#define GPIOJ                           ((stm32_gpio_t *)GPIOJ_BASE)
-#define GPIOK                           ((stm32_gpio_t *)GPIOK_BASE)
+#define GPIOA                           ((sn32_gpio_t *)GPIOA_BASE)
+#define GPIOB                           ((sn32_gpio_t *)GPIOB_BASE)
+#define GPIOC                           ((sn32_gpio_t *)GPIOC_BASE)
+#define GPIOD                           ((sn32_gpio_t *)GPIOD_BASE)
+#define GPIOE                           ((sn32_gpio_t *)GPIOE_BASE)
+#define GPIOF                           ((sn32_gpio_t *)GPIOF_BASE)
+#define GPIOG                           ((sn32_gpio_t *)GPIOG_BASE)
+#define GPIOH                           ((sn32_gpio_t *)GPIOH_BASE)
+#define GPIOI                           ((sn32_gpio_t *)GPIOI_BASE)
+#define GPIOJ                           ((sn32_gpio_t *)GPIOJ_BASE)
+#define GPIOK                           ((sn32_gpio_t *)GPIOK_BASE)
 /** @} */
 
 /*===========================================================================*/
@@ -208,7 +208,7 @@
  * @brief   Decodes a port identifier from a line identifier.
  */
 #define PAL_PORT(line)                                                      \
-  ((stm32_gpio_t *)(((uint32_t)(line)) & 0xFFFFFFF0U))
+  ((sn32_gpio_t *)(((uint32_t)(line)) & 0xFFFFFFF0U))
 
 /**
  * @brief   Decodes a pad identifier from a line identifier.
@@ -223,7 +223,7 @@
 /** @} */
 
 /**
- * @brief   STM32 GPIO registers block.
+ * @brief   SN32 GPIO registers block.
  */
 typedef struct {
 
@@ -245,7 +245,7 @@ typedef struct {
   volatile uint32_t     AFRH;
   volatile uint32_t     BRR;
   volatile uint32_t     ASCR;
-} stm32_gpio_t;
+} sn32_gpio_t;
 
 /**
  * @brief   GPIO port setup info.
@@ -269,59 +269,59 @@ typedef struct {
   uint32_t              ascr;
   /** Initial value for LOCKR register.*/
   uint32_t              lockr;
-} stm32_gpio_setup_t;
+} sn32_gpio_setup_t;
 
 /**
- * @brief   STM32 GPIO static initializer.
+ * @brief   SN32 GPIO static initializer.
  * @details An instance of this structure must be passed to @p palInit() at
  *          system startup time in order to initialize the digital I/O
  *          subsystem. This represents only the initial setup, specific pads
  *          or whole ports can be reprogrammed at later time.
  */
 typedef struct {
-#if STM32_HAS_GPIOA || defined(__DOXYGEN__)
+#if SN32_HAS_GPIOA || defined(__DOXYGEN__)
   /** @brief Port A setup data.*/
-  stm32_gpio_setup_t    PAData;
+  sn32_gpio_setup_t    PAData;
 #endif
-#if STM32_HAS_GPIOB || defined(__DOXYGEN__)
+#if SN32_HAS_GPIOB || defined(__DOXYGEN__)
   /** @brief Port B setup data.*/
-  stm32_gpio_setup_t    PBData;
+  sn32_gpio_setup_t    PBData;
 #endif
-#if STM32_HAS_GPIOC || defined(__DOXYGEN__)
+#if SN32_HAS_GPIOC || defined(__DOXYGEN__)
   /** @brief Port C setup data.*/
-  stm32_gpio_setup_t    PCData;
+  sn32_gpio_setup_t    PCData;
 #endif
-#if STM32_HAS_GPIOD || defined(__DOXYGEN__)
+#if SN32_HAS_GPIOD || defined(__DOXYGEN__)
   /** @brief Port D setup data.*/
-  stm32_gpio_setup_t    PDData;
+  sn32_gpio_setup_t    PDData;
 #endif
-#if STM32_HAS_GPIOE || defined(__DOXYGEN__)
+#if SN32_HAS_GPIOE || defined(__DOXYGEN__)
   /** @brief Port E setup data.*/
-  stm32_gpio_setup_t    PEData;
+  sn32_gpio_setup_t    PEData;
 #endif
-#if STM32_HAS_GPIOF || defined(__DOXYGEN__)
+#if SN32_HAS_GPIOF || defined(__DOXYGEN__)
   /** @brief Port F setup data.*/
-  stm32_gpio_setup_t    PFData;
+  sn32_gpio_setup_t    PFData;
 #endif
-#if STM32_HAS_GPIOG || defined(__DOXYGEN__)
+#if SN32_HAS_GPIOG || defined(__DOXYGEN__)
   /** @brief Port G setup data.*/
-  stm32_gpio_setup_t    PGData;
+  sn32_gpio_setup_t    PGData;
 #endif
-#if STM32_HAS_GPIOH || defined(__DOXYGEN__)
+#if SN32_HAS_GPIOH || defined(__DOXYGEN__)
   /** @brief Port H setup data.*/
-  stm32_gpio_setup_t    PHData;
+  sn32_gpio_setup_t    PHData;
 #endif
-#if STM32_HAS_GPIOI || defined(__DOXYGEN__)
+#if SN32_HAS_GPIOI || defined(__DOXYGEN__)
   /** @brief Port I setup data.*/
-  stm32_gpio_setup_t    PIData;
+  sn32_gpio_setup_t    PIData;
 #endif
-#if STM32_HAS_GPIOJ || defined(__DOXYGEN__)
+#if SN32_HAS_GPIOJ || defined(__DOXYGEN__)
   /** @brief Port I setup data.*/
-  stm32_gpio_setup_t    PJData;
+  sn32_gpio_setup_t    PJData;
 #endif
-#if STM32_HAS_GPIOK || defined(__DOXYGEN__)
+#if SN32_HAS_GPIOK || defined(__DOXYGEN__)
   /** @brief Port I setup data.*/
-  stm32_gpio_setup_t    PKData;
+  sn32_gpio_setup_t    PKData;
 #endif
 } PALConfig;
 
@@ -346,88 +346,88 @@ typedef uint32_t ioline_t;
  *          any assumption about it, use the provided macros when populating
  *          variables of this type.
  */
-typedef stm32_gpio_t * ioportid_t;
+typedef sn32_gpio_t * ioportid_t;
 
 /*===========================================================================*/
 /* I/O Ports Identifiers.                                                    */
-/* The low level driver wraps the definitions already present in the STM32   */
+/* The low level driver wraps the definitions already present in the SN32   */
 /* firmware library.                                                         */
 /*===========================================================================*/
 
 /**
  * @brief   GPIO port A identifier.
  */
-#if STM32_HAS_GPIOA || defined(__DOXYGEN__)
+#if SN32_HAS_GPIOA || defined(__DOXYGEN__)
 #define IOPORT1         GPIOA
 #endif
 
 /**
  * @brief   GPIO port B identifier.
  */
-#if STM32_HAS_GPIOB || defined(__DOXYGEN__)
+#if SN32_HAS_GPIOB || defined(__DOXYGEN__)
 #define IOPORT2         GPIOB
 #endif
 
 /**
  * @brief   GPIO port C identifier.
  */
-#if STM32_HAS_GPIOC || defined(__DOXYGEN__)
+#if SN32_HAS_GPIOC || defined(__DOXYGEN__)
 #define IOPORT3         GPIOC
 #endif
 
 /**
  * @brief   GPIO port D identifier.
  */
-#if STM32_HAS_GPIOD || defined(__DOXYGEN__)
+#if SN32_HAS_GPIOD || defined(__DOXYGEN__)
 #define IOPORT4         GPIOD
 #endif
 
 /**
  * @brief   GPIO port E identifier.
  */
-#if STM32_HAS_GPIOE || defined(__DOXYGEN__)
+#if SN32_HAS_GPIOE || defined(__DOXYGEN__)
 #define IOPORT5         GPIOE
 #endif
 
 /**
  * @brief   GPIO port F identifier.
  */
-#if STM32_HAS_GPIOF || defined(__DOXYGEN__)
+#if SN32_HAS_GPIOF || defined(__DOXYGEN__)
 #define IOPORT6         GPIOF
 #endif
 
 /**
  * @brief   GPIO port G identifier.
  */
-#if STM32_HAS_GPIOG || defined(__DOXYGEN__)
+#if SN32_HAS_GPIOG || defined(__DOXYGEN__)
 #define IOPORT7         GPIOG
 #endif
 
 /**
  * @brief   GPIO port H identifier.
  */
-#if STM32_HAS_GPIOH || defined(__DOXYGEN__)
+#if SN32_HAS_GPIOH || defined(__DOXYGEN__)
 #define IOPORT8         GPIOH
 #endif
 
 /**
  * @brief   GPIO port I identifier.
  */
-#if STM32_HAS_GPIOI || defined(__DOXYGEN__)
+#if SN32_HAS_GPIOI || defined(__DOXYGEN__)
 #define IOPORT9         GPIOI
 #endif
 
 /**
  * @brief   GPIO port J identifier.
  */
-#if STM32_HAS_GPIOJ || defined(__DOXYGEN__)
+#if SN32_HAS_GPIOJ || defined(__DOXYGEN__)
 #define IOPORT10        GPIOJ
 #endif
 
 /**
  * @brief   GPIO port K identifier.
  */
-#if STM32_HAS_GPIOK || defined(__DOXYGEN__)
+#if SN32_HAS_GPIOK || defined(__DOXYGEN__)
 #define IOPORT11        GPIOK
 #endif
 

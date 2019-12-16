@@ -16,7 +16,7 @@
 
 /**
  * @file    GPIOv3/hal_pal_lld.c
- * @brief   STM32 PAL low level driver code.
+ * @brief   SN32 PAL low level driver code.
  *
  * @addtogroup PAL
  * @{
@@ -30,8 +30,8 @@
 /* Driver local definitions.                                                 */
 /*===========================================================================*/
 
-#if defined(STM32L4XX)
-#define AHB2_EN_MASK    STM32_GPIO_EN_MASK
+#if defined(SN32L4XX)
+#define AHB2_EN_MASK    SN32_GPIO_EN_MASK
 #define AHB2_LPEN_MASK  0
 
 #else
@@ -50,7 +50,7 @@
 /* Driver local functions.                                                   */
 /*===========================================================================*/
 
-static void initgpio(stm32_gpio_t *gpiop, const stm32_gpio_setup_t *config) {
+static void initgpio(sn32_gpio_t *gpiop, const sn32_gpio_setup_t *config) {
 
   gpiop->OTYPER  = config->otyper;
   gpiop->ASCR    = config->ascr;
@@ -72,10 +72,10 @@ static void initgpio(stm32_gpio_t *gpiop, const stm32_gpio_setup_t *config) {
 /*===========================================================================*/
 
 /**
- * @brief   STM32 I/O ports configuration.
+ * @brief   SN32 I/O ports configuration.
  * @details Ports A-D(E, F, G, H) clocks enabled.
  *
- * @param[in] config    the STM32 ports configuration
+ * @param[in] config    the SN32 ports configuration
  *
  * @notapi
  */
@@ -84,44 +84,44 @@ void _pal_lld_init(const PALConfig *config) {
   /*
    * Enables the GPIO related clocks.
    */
-#if defined(STM32L4XX)
+#if defined(SN32L4XX)
   RCC->AHB2ENR |= AHB2_EN_MASK;
 #endif
 
   /*
    * Initial GPIO setup.
    */
-#if STM32_HAS_GPIOA
+#if SN32_HAS_GPIOA
   initgpio(GPIOA, &config->PAData);
 #endif
-#if STM32_HAS_GPIOB
+#if SN32_HAS_GPIOB
   initgpio(GPIOB, &config->PBData);
 #endif
-#if STM32_HAS_GPIOC
+#if SN32_HAS_GPIOC
   initgpio(GPIOC, &config->PCData);
 #endif
-#if STM32_HAS_GPIOD
+#if SN32_HAS_GPIOD
   initgpio(GPIOD, &config->PDData);
 #endif
-#if STM32_HAS_GPIOE
+#if SN32_HAS_GPIOE
   initgpio(GPIOE, &config->PEData);
 #endif
-#if STM32_HAS_GPIOF
+#if SN32_HAS_GPIOF
   initgpio(GPIOF, &config->PFData);
 #endif
-#if STM32_HAS_GPIOG
+#if SN32_HAS_GPIOG
   initgpio(GPIOG, &config->PGData);
 #endif
-#if STM32_HAS_GPIOH
+#if SN32_HAS_GPIOH
   initgpio(GPIOH, &config->PHData);
 #endif
-#if STM32_HAS_GPIOI
+#if SN32_HAS_GPIOI
   initgpio(GPIOI, &config->PIData);
 #endif
-#if STM32_HAS_GPIOJ
+#if SN32_HAS_GPIOJ
   initgpio(GPIOJ, &config->PJData);
 #endif
-#if STM32_HAS_GPIOK
+#if SN32_HAS_GPIOK
   initgpio(GPIOK, &config->PKData);
 #endif
 }
@@ -143,13 +143,13 @@ void _pal_lld_setgroupmode(ioportid_t port,
                            ioportmask_t mask,
                            iomode_t mode) {
 
-  uint32_t moder   = (mode & PAL_STM32_MODE_MASK) >> 0;
-  uint32_t otyper  = (mode & PAL_STM32_OTYPE_MASK) >> 2;
-  uint32_t ospeedr = (mode & PAL_STM32_OSPEED_MASK) >> 3;
-  uint32_t pupdr   = (mode & PAL_STM32_PUPDR_MASK) >> 5;
-  uint32_t altr    = (mode & PAL_STM32_ALTERNATE_MASK) >> 7;
-  uint32_t ascr    = (mode & PAL_STM32_ASCR_MASK) >> 11;
-  uint32_t lockr   = (mode & PAL_STM32_LOCKR_MASK) >> 12;
+  uint32_t moder   = (mode & PAL_SN32_MODE_MASK) >> 0;
+  uint32_t otyper  = (mode & PAL_SN32_OTYPE_MASK) >> 2;
+  uint32_t ospeedr = (mode & PAL_SN32_OSPEED_MASK) >> 3;
+  uint32_t pupdr   = (mode & PAL_SN32_PUPDR_MASK) >> 5;
+  uint32_t altr    = (mode & PAL_SN32_ALTERNATE_MASK) >> 7;
+  uint32_t ascr    = (mode & PAL_SN32_ASCR_MASK) >> 11;
+  uint32_t lockr   = (mode & PAL_SN32_LOCKR_MASK) >> 12;
   uint32_t bit     = 0;
   while (true) {
     if ((mask & 1) != 0) {
@@ -163,7 +163,7 @@ void _pal_lld_setgroupmode(ioportid_t port,
       port->ASCR    = (port->ASCR & ~m1) | ascr;
       port->OSPEEDR = (port->OSPEEDR & ~m2) | ospeedr;
       port->PUPDR   = (port->PUPDR & ~m2) | pupdr;
-       if ((mode & PAL_STM32_MODE_MASK) == PAL_STM32_MODE_ALTERNATE) {
+       if ((mode & PAL_SN32_MODE_MASK) == PAL_SN32_MODE_ALTERNATE) {
         /* If going in alternate mode then the alternate number is set
            before switching mode in order to avoid glitches.*/
         if (bit < 8)
