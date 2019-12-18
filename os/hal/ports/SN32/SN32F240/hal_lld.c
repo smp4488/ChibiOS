@@ -56,7 +56,61 @@
  * @special
  */
 void sn32_clock_init(void) {
+#if (SYS_CLOCK_SETUP)
 
+	#if SYS0_CLKCFG_VAL == IHRC			//IHRC
+
+	#endif
+
+	#if SYS0_CLKCFG_VAL == ILRC			//ILRC
+	SN_SYS0->CLKCFG = 0x1;
+    while ((SN_SYS0->CLKCFG & 0x70) != 0x10);
+	#endif
+
+	#if (SYS0_CLKCFG_VAL == EHSXTAL)	//EHS XTAL
+	#if (EHS_FREQ > 12)
+	SN_SYS0->ANBCTRL |= (1<<5);
+	#else
+	SN_SYS0->ANBCTRL &=~(1<<5);
+	#endif
+	SN_SYS0->ANBCTRL |= (1<<4);
+	while ((SN_SYS0->CSST & 0x10) != 0x10);
+	SN_SYS0->CLKCFG = 0x2;
+    while ((SN_SYS0->CLKCFG & 0x70) != 0x20);
+	#endif
+
+	#if (SYS0_CLKCFG_VAL == ELSXTAL)	//ELS XTAL
+	SN_SYS0->ANBCTRL |=0x04;
+	while((SN_SYS0->CSST & 0x4) != 0x4);
+	SN_SYS0->CLKCFG = 0x3;
+    while ((SN_SYS0->CLKCFG & 0x70) != 0x30);
+	#endif
+
+	#if (SYS0_CLKCFG_VAL == PLL)		//PLL
+	SN_SYS0->PLLCTRL = SYS0_PLLCTRL_VAL;
+	if (PLL_CLKIN == 0x1)	//EHS XTAL as F_CLKIN
+	{
+		//Enable EHS
+		#if (EHS_FREQ > 12)
+		SN_SYS0->ANBCTRL |= (1<<5);
+		#else
+		SN_SYS0->ANBCTRL &=~(1<<5);
+		#endif
+		SN_SYS0->ANBCTRL |= (1<<4);
+		while ((SN_SYS0->CSST & 0x10) != 0x10);
+	}
+
+	while ((SN_SYS0->CSST & 0x40) != 0x40);
+    SN_SYS0->CLKCFG = 0x4;
+    while ((SN_SYS0->CLKCFG & 0x70) != 0x40);
+	#endif
+
+	SN_SYS0->AHBCP = AHB_PRESCALAR;
+
+	#if (CLKOUT_SEL_VAL > 0)			//CLKOUT
+	SN_SYS1->AHBCLKEN_b.CLKOUTSEL = CLKOUT_SEL_VAL;
+	#endif
+#endif //(SYS_CLOCK_SETUP)
 }
 
 /**

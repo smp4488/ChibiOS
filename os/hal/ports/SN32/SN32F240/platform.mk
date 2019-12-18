@@ -10,11 +10,11 @@ PLATFORMINC := $(CHIBIOS)/os/hal/ports/common/ARMCMx \
 ifeq ($(USE_SMART_BUILD),yes)
 HALCONF := $(strip $(shell cat halconf.h | egrep -e "\#define"))
 
-ifneq ($(findstring HAL_USE_EXT TRUE,$(HALCONF)),)
-PLATFORMSRC += $(CHIBIOS)/os/hal/ports/SN32/SN32F240/hal_ext_lld_isr.c
-endif
-else
-PLATFORMSRC += $(CHIBIOS)/os/hal/ports/SN32/SN32F240/hal_ext_lld_isr.c
+# ifneq ($(findstring HAL_USE_EXT TRUE,$(HALCONF)),)
+# PLATFORMSRC += $(CHIBIOS)/os/hal/ports/SN32/SN32F240/hal_ext_lld_isr.c
+# endif
+# else
+# PLATFORMSRC += $(CHIBIOS)/os/hal/ports/SN32/SN32F240/hal_ext_lld_isr.c
 endif
 
 # Drivers compatible with the platform.

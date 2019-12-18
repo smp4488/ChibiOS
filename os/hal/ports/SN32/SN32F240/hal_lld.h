@@ -74,7 +74,7 @@
 /* Various helpers.*/
 #include "nvic.h"
 #include "sn32_isr.h"
-// #include "sn32_rcc.h"
+#include "sn32_rcc.h"
 
 #ifdef __cplusplus
 extern "C" {
