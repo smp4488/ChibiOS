@@ -20,6 +20,7 @@ endif
 # Drivers compatible with the platform.
 include $(CHIBIOS)/os/hal/ports/SN32/LLD/GPIO/driver.mk
 include $(CHIBIOS)/os/hal/ports/SN32/LLD/USB/driver.mk
+include $(CHIBIOS)/os/hal/ports/SN32/LLD/CT/driver.mk
 
 # include $(CHIBIOS)/os/hal/ports/SN32/LLD/GPIOv3/driver.mk
 # include $(CHIBIOS)/os/hal/ports/SN32/LLD/USBv1/driver.mk
