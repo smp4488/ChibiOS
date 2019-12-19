@@ -47,6 +47,8 @@ const PALConfig pal_default_config = {
 };
 #endif
 
+static int flag __attribute__((section(".flag"))) __attribute__((__used__)) = 6;
+
 /**
  * @brief   Early initialization code.
  * @details This initialization must be performed just after stack setup

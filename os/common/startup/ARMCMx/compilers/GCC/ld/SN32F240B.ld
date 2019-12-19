@@ -83,3 +83,14 @@ REGION_ALIAS("HEAP_RAM", ram0);
 
 /* Generic rules inclusion.*/
 INCLUDE rules.ld
+
+
+_flag_start = 0xFFFC;
+
+SECTIONS
+{
+    .flag _flag_start :
+    {
+        KEEP(*(.flag)) ;
+    } > flash0
+}

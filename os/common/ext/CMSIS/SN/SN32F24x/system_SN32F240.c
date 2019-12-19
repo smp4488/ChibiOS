@@ -9,9 +9,9 @@
  * Copyright (C) 2009-2013 ARM Limited. All rights reserved.
  *
  * @par
- * ARM Limited (ARM) is supplying this software for use with Cortex-M 
- * processor based microcontrollers.  This file can be freely distributed 
- * within development tools that are supporting such ARM based processors. 
+ * ARM Limited (ARM) is supplying this software for use with Cortex-M
+ * processor based microcontrollers.  This file can be freely distributed
+ * within development tools that are supporting such ARM based processors.
  *
  * @par
  * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
@@ -24,7 +24,7 @@
 
 
 #include <stdint.h>
-#include <SN32F240.h>
+#include "SN32F240B.h"
 
 
 
@@ -41,7 +41,7 @@
 //					<2=> EHS X'TAL
 //					<3=> ELS X'TAL
 //					<4=> PLL
-//	
+//
 //		<o2> EHS Source Frequency (MHz)
 //			<10-25>
 //
@@ -153,14 +153,14 @@ void SystemCoreClockUpdate (void)            /* Get Core Clock Frequency      */
 		case 2:		//EHS X'TAL
 			#if (SYS_CLOCK_SETUP)
 			SystemCoreClock = EHS_FREQ * 1000000;
-			#else	
+			#else
 			//TODO: User had to assign EHS X'TAL frequency.
 			SystemCoreClock = 10000000UL / AHB_prescaler;
 			#endif
-			break;			
+			break;
 		case 3:		//ELS X'TAL
 			SystemCoreClock = __ELS_XTAL_FREQ;
-			break;	
+			break;
 		case 4: 	//PLL
 			#if (SYS_CLOCK_SETUP)
 			if (PLL_FSEL == 0)
@@ -177,7 +177,7 @@ void SystemCoreClockUpdate (void)            /* Get Core Clock Frequency      */
 			#endif
 			break;
 		default:
-			break;		
+			break;
 	}
 
 	switch (SN_SYS0->AHBCP)
@@ -192,7 +192,7 @@ void SystemCoreClockUpdate (void)            /* Get Core Clock Frequency      */
 		case 7:	AHB_prescaler = 128;break;
 		case 8:	AHB_prescaler = 256;break;
 		case 9:	AHB_prescaler = 512;break;
-		default: break;	
+		default: break;
 	}
 
 	SystemCoreClock /= AHB_prescaler;
