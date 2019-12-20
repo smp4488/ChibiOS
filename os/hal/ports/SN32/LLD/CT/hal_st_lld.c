@@ -59,7 +59,7 @@
  *
  * @isr
  */
-OSAL_IRQ_HANDLER(SysTick_Handler) {
+c(SysTick_Handler) {
 
   OSAL_IRQ_PROLOGUE();
   //Wait until timer reset done.
@@ -112,7 +112,7 @@ void st_lld_init(void) {
 //   /* IRQ enabled.*/
 //   nvicSetSystemHandlerPriority(HANDLER_SYSTICK, 8);
   /* IRQ enabled.*/
-//   nvicEnableVector(ST_NUMBER, 8);
+  nvicEnableVector(31, 8);
 }
 
 #endif /* OSAL_ST_MODE != OSAL_ST_MODE_NONE */
