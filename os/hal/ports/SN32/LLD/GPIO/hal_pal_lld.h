@@ -150,10 +150,10 @@
  * @name    GPIO ports definitions
  * @{
  */
-#define GPIOA                           ((sn32_gpio_t *)GPIOA_BASE)
-#define GPIOB                           ((sn32_gpio_t *)GPIOB_BASE)
-#define GPIOC                           ((sn32_gpio_t *)GPIOC_BASE)
-#define GPIOD                           ((sn32_gpio_t *)GPIOD_BASE)
+#define GPIOA                           ((sn32_gpio_t *)SN_GPIO0_BASE)
+#define GPIOB                           ((sn32_gpio_t *)SN_GPIO1_BASE)
+#define GPIOC                           ((sn32_gpio_t *)SN_GPIO2_BASE)
+#define GPIOD                           ((sn32_gpio_t *)SN_GPIO3_BASE)
 /** @} */
 
 /*===========================================================================*/

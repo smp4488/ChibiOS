@@ -45,13 +45,13 @@ void	CT16B0_NvicDisable (void);
 * Return		: None
 * Note			: None
 *****************************************************************************/
-void	CT16B0_Init (void)
+void CT16B0_Init (void)
 {
 	//Enable P_CLOCK for CT16B0.
 	__CT16B0_ENABLE;
 
 	//CT16B0 PCLK prescalar setting
-	SN_SYS1->APBCP0_b.CT16B0PRE = 0x00;							//PCLK = HCLK/1
+	// SN_SYS1->APBCP1_b.CT16B0PRE = 0x00;							//PCLK = HCLK/1
 	//SN_SYS1->APBCP0_b.CT16B0PRE = 0x01;						//PCLK = HCLK/2
 	//SN_SYS1->APBCP0_b.CT16B0PRE = 0x02;						//PCLK = HCLK/4
 	//SN_SYS1->APBCP0_b.CT16B0PRE = 0x03;						//PCLK = HCLK/8
@@ -66,7 +66,7 @@ void	CT16B0_Init (void)
 * Return		: None
 * Note			: None
 *****************************************************************************/
-void	CT16B0_NvicEnable (void)
+void CT16B0_NvicEnable (void)
 {
 	NVIC_ClearPendingIRQ(CT16B0_IRQn);
 	NVIC_EnableIRQ(CT16B0_IRQn);
@@ -81,7 +81,7 @@ void	CT16B0_NvicEnable (void)
 * Return		: None
 * Note			: None
 *****************************************************************************/
-void	CT16B0_NvicDisable (void)
+void CT16B0_NvicDisable (void)
 {
 	NVIC_DisableIRQ(CT16B0_IRQn);
 }
@@ -96,7 +96,7 @@ void	CT16B0_NvicDisable (void)
 * Return		: None
 * Note			: None
 *****************************************************************************/
-__irq void CT16B0_IRQHandler(void)
+void CT16B0_IRQHandler(void)
 {
 	uint32_t iwRisStatus;
 
@@ -116,33 +116,6 @@ __irq void CT16B0_IRQHandler(void)
 		{
 			iwCT16B0_IrqEvent |= mskCT16_MR0IF;
 			SN_CT16B0->IC = mskCT16_MR0IC;	//Clear MR0 match interrupt status
-		}
-	}
-	//MR1
-	if (SN_CT16B0->MCTRL_b.MR1IE)				//Check if MR1 IE enables?
-	{
-		if(iwRisStatus & mskCT16_MR1IF)
-		{
-			iwCT16B0_IrqEvent |= mskCT16_MR1IF;
-			SN_CT16B0->IC = mskCT16_MR1IC;	//Clear MR1 match interrupt status
-		}
-	}
-	//MR2
-	if (SN_CT16B0->MCTRL_b.MR2IE)				//Check if MR2 IE enables?
-	{
-		if(iwRisStatus & mskCT16_MR2IF)
-		{
-			iwCT16B0_IrqEvent |= mskCT16_MR2IF;
-			SN_CT16B0->IC = mskCT16_MR2IC;	//Clear MR2 match interrupt status
-		}
-	}
-	//MR3
-	if (SN_CT16B0->MCTRL_b.MR3IE)				//Check if MR3 IE enables?
-	{
-		if(iwRisStatus & mskCT16_MR3IF)
-		{
-			iwCT16B0_IrqEvent |= mskCT16_MR3IF;
-			SN_CT16B0->IC = mskCT16_MR3IC;	//Clear MR3 match interrupt status
 		}
 	}
 	//CAP0

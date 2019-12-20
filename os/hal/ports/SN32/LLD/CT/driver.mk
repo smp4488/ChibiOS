@@ -1,19 +1,11 @@
+ifeq ($(USE_SMART_BUILD),yes)
+ifneq ($(findstring HAL_USE_CT TRUE,$(HALCONF)),)
 PLATFORMSRC += $(CHIBIOS)/os/hal/ports/SN32/LLD/CT/hal_st_lld.c
+endif
+else
+PLATFORMSRC += $(CHIBIOS)/os/hal/ports/SN32/LLD/CT/hal_st_lld.c
+endif
 
-# ifeq ($(USE_SMART_BUILD),yes)
-# ifneq ($(findstring HAL_USE_GPT TRUE,$(HALCONF)),)
-# PLATFORMSRC += $(CHIBIOS)/os/hal/ports/SN32/LLD/CT/hal_gpt_lld.c
-# endif
-# ifneq ($(findstring HAL_USE_ICU TRUE,$(HALCONF)),)
-# PLATFORMSRC += $(CHIBIOS)/os/hal/ports/SN32/LLD/CT/hal_icu_lld.c
-# endif
-# ifneq ($(findstring HAL_USE_PWM TRUE,$(HALCONF)),)
-# PLATFORMSRC += $(CHIBIOS)/os/hal/ports/SN32/LLD/CT/hal_pwm_lld.c
-# endif
-# else
-# PLATFORMSRC += $(CHIBIOS)/os/hal/ports/SN32/LLD/CT/hal_gpt_lld.c
-# PLATFORMSRC += $(CHIBIOS)/os/hal/ports/SN32/LLD/CT/hal_icu_lld.c
-# PLATFORMSRC += $(CHIBIOS)/os/hal/ports/SN32/LLD/CT/hal_pwm_lld.c
-# endif
+PLATFORMSRC += $(CHIBIOS)/os/hal/ports/SN32/LLD/CT/CT16B0.c
 
 PLATFORMINC += $(CHIBIOS)/os/hal/ports/SN32/LLD/CT

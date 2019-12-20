@@ -27,6 +27,10 @@
 #ifndef HAL_ST_LLD_H
 #define HAL_ST_LLD_H
 
+#include "SN32F240B.h"
+#include <CT16.h>
+#include <CT16B0.h>
+
 /*===========================================================================*/
 /* Driver constants.                                                         */
 /*===========================================================================*/
@@ -72,7 +76,8 @@ extern "C" {
  */
 static inline systime_t st_lld_get_counter(void) {
 
-  return (systime_t)0;
+    static unsigned value = 0;
+    return (systime_t)value++;
 }
 
 /**

@@ -6,8 +6,8 @@
 /*_____ D E F I N I T I O N S ______________________________________________*/
 
 //Ture or False
-#define TRUE		0x1
-#define FALSE		0x0
+// #define TRUE		0x1
+// #define FALSE		0x0
 
 //Enable or Disable
 #define ENABLE		0x1
@@ -18,7 +18,7 @@
 #define	FAIL		0x1
 
 //Null
-#define NULL		0
+// #define NULL		0
 
 //Interrupt Flag Parsing Method
 #define	POLLING_METHOD		0x0
