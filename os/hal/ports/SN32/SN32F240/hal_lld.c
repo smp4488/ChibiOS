@@ -23,6 +23,7 @@
  */
 
 #include "hal.h"
+#include <SN32F240B.h>
 
 /*===========================================================================*/
 /* Driver local definitions.                                                 */
@@ -86,24 +87,24 @@ void sn32_clock_init(void) {
     while ((SN_SYS0->CLKCFG & 0x70) != 0x30);
 	#endif
 
-	#if (SYS0_CLKCFG_VAL == PLL)		//PLL
-	SN_SYS0->PLLCTRL = SYS0_PLLCTRL_VAL;
-	if (PLL_CLKIN == 0x1)	//EHS XTAL as F_CLKIN
-	{
-		//Enable EHS
-		#if (EHS_FREQ > 12)
-		SN_SYS0->ANBCTRL |= (1<<5);
-		#else
-		SN_SYS0->ANBCTRL &=~(1<<5);
-		#endif
-		SN_SYS0->ANBCTRL |= (1<<4);
-		while ((SN_SYS0->CSST & 0x10) != 0x10);
-	}
+	// #if (SYS0_CLKCFG_VAL == PLL)		//PLL
+    // SN_SYS0->ANBCTRL = SYS0_ANBCTRL_VAL;
+    // if (PLL_CLKIN == 0x1)	//EHS XTAL as F_CLKIN
+	// {
+	// 	//Enable EHS
+	// 	#if (EHS_FREQ > 12)
+	// 	SN_SYS0->ANBCTRL |= (1<<5);
+	// 	#else
+	// 	SN_SYS0->ANBCTRL &=~(1<<5);
+	// 	#endif
+	// 	SN_SYS0->ANBCTRL |= (1<<4);
+	// 	while ((SN_SYS0->CSST & 0x10) != 0x10);
+	// }
 
-	while ((SN_SYS0->CSST & 0x40) != 0x40);
-    SN_SYS0->CLKCFG = 0x4;
-    while ((SN_SYS0->CLKCFG & 0x70) != 0x40);
-	#endif
+	// while ((SN_SYS0->CSST & 0x40) != 0x40);
+    // SN_SYS0->CLKCFG = 0x4;
+    // while ((SN_SYS0->CLKCFG & 0x70) != 0x40);
+	// #endif
 
 	SN_SYS0->AHBCP = AHB_PRESCALAR;
 

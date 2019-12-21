@@ -486,8 +486,7 @@ void usbStartReceiveI(USBDriver *usbp, usbep_t ep,
  *
  * @iclass
  */
-void usbStartTransmitI(USBDriver *usbp, usbep_t ep,
-                       const uint8_t *buf, size_t n) {
+void usbStartTransmitI(USBDriver *usbp, usbep_t ep, const uint8_t *buf, size_t n) {
   USBInEndpointState *isp;
 
   osalDbgCheckClassI();

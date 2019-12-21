@@ -27,6 +27,8 @@
 #ifndef HAL_ST_LLD_H
 #define HAL_ST_LLD_H
 
+#include "CT16B0.h"
+
 /*===========================================================================*/
 /* Driver constants.                                                         */
 /*===========================================================================*/
@@ -72,8 +74,9 @@ extern "C" {
  */
 static inline systime_t st_lld_get_counter(void) {
 
-    static unsigned value = 0;
-    return (systime_t)value++;
+    // static unsigned value = 0;
+    // return (systime_t)value++;
+    return (systime_t)SN_CT16B0->TC;
 }
 
 /**

@@ -23,6 +23,7 @@
  */
 
 #include "hal.h"
+#include "usbhw.h"
 
 #if (HAL_USE_USB == TRUE) || defined(__DOXYGEN__)
 
@@ -98,10 +99,8 @@ static const USBEndpointConfig ep0config = {
  */
 void usb_lld_init(void) {
 
-#if PLATFORM_USB_USE_USB1 == TRUE
   /* Driver initialization.*/
   usbObjectInit(&USBD1);
-#endif
 }
 
 /**
@@ -117,12 +116,14 @@ void usb_lld_start(USBDriver *usbp) {
     /* Enables the peripheral.*/
 #if PLATFORM_USB_USE_USB1 == TRUE
     if (&USBD1 == usbp) {
-
+        // SN_USB->EP0CTL->ENDP_CNT
+        nvicEnableVector(USB_IRQn, 14);
     }
 #endif
+    usb_lld_reset(usbp);
   }
   /* Configures the peripheral.*/
-
+  USB_Init();
 }
 
 /**
