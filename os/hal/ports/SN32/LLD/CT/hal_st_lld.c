@@ -25,6 +25,7 @@
 #include "hal.h"
 #include "CT16.h"
 #include "CT16B0.h"
+#include "SN32F240B.h"
 
 #if (OSAL_ST_MODE != OSAL_ST_MODE_NONE) || defined(__DOXYGEN__)
 
@@ -33,7 +34,6 @@
 /*===========================================================================*/
 
 #define IHRC_CLOCK 48000000
-#define SYS0_AHBCP (*(volatile uint32_t*)0x40060010)
 
 /*===========================================================================*/
 /* Driver exported variables.                                                */
@@ -81,7 +81,7 @@ OSAL_IRQ_HANDLER(SysTick_Handler) {
 void st_lld_init(void) {
     /* Periodic systick mode, the Cortex-Mx internal systick timer is used
      in this mode.*/
-  SysTick->LOAD = ((IHRC_CLOCK >> SYS0_AHBCP) / OSAL_ST_FREQUENCY) - 1;
+  SysTick->LOAD = ((IHRC_CLOCK >> SN_SYS0->AHBCP) / OSAL_ST_FREQUENCY) - 1;
   SysTick->VAL = 0;
   SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk |
                   SysTick_CTRL_ENABLE_Msk |
