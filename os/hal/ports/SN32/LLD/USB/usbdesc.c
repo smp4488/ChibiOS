@@ -554,18 +554,18 @@ USB_HID_DESC_SIZE, HID_DESCRIPTOR_INDEX1},					//NO.12 HID
 USB_HID_DESC_SIZE, HID_DESCRIPTOR_INDEX2},					//NO.12 HID
 #endif
 
-// #if (USB_LIBRARY_TYPE == USB_MOUSE_TYPE)
-// {HID_REPORT_DESCRIPTOR_TYPE, USB_INTERFACE_0, 0,				//{type, interface0, StringTypes, size, descriptor_matrix}
-// HID_ReportDescSize, HID_ReportDescriptor},							//NO.13 REPORT INT0
-// #else
-// {HID_REPORT_DESCRIPTOR_TYPE, USB_INTERFACE_0, 0, 				//{type, interface0, StringTypes, size, descriptor_matrix}
-// HID_ReportDescSize, HID_ReportDescriptor},							//NO.13 REPORT INT0
-// #endif
-// {HID_REPORT_DESCRIPTOR_TYPE, USB_INTERFACE_1, 0, 				//{type, interface0, StringTypes, size, descriptor_matrix}
-// HID_ReportDescSize2, HID_ReportDescriptor2},						//NO.13	REPORT INT1
-// ///
-// {HID_REPORT_DESCRIPTOR_TYPE, USB_INTERFACE_2, 0, 				//{type, interface0, StringTypes, size, descriptor_matrix}
-// HID_ReportDescSize3, HID_ReportDescriptor3}							//NO.14	REPORT INT2
+#if (USB_LIBRARY_TYPE == USB_MOUSE_TYPE)
+{HID_REPORT_DESCRIPTOR_TYPE, USB_INTERFACE_0, 0,				//{type, interface0, StringTypes, size, descriptor_matrix}
+HID_ReportDescSize, HID_ReportDescriptor},							//NO.13 REPORT INT0
+#else
+{HID_REPORT_DESCRIPTOR_TYPE, USB_INTERFACE_0, 0, 				//{type, interface0, StringTypes, size, descriptor_matrix}
+HID_ReportDescSize, HID_ReportDescriptor},							//NO.13 REPORT INT0
+#endif
+{HID_REPORT_DESCRIPTOR_TYPE, USB_INTERFACE_1, 0, 				//{type, interface0, StringTypes, size, descriptor_matrix}
+HID_ReportDescSize2, HID_ReportDescriptor2},						//NO.13	REPORT INT1
+///
+{HID_REPORT_DESCRIPTOR_TYPE, USB_INTERFACE_2, 0, 				//{type, interface0, StringTypes, size, descriptor_matrix}
+HID_ReportDescSize3, HID_ReportDescriptor3}							//NO.14	REPORT INT2
 
 };
 
