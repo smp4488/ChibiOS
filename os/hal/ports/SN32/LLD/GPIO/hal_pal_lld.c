@@ -52,15 +52,15 @@
 
 static void initgpio(sn32_gpio_t *gpiop, const sn32_gpio_setup_t *config) {
 
-  gpiop->OTYPER  = config->otyper;
-  gpiop->ASCR    = config->ascr;
-  gpiop->OSPEEDR = config->ospeedr;
-  gpiop->PUPDR   = config->pupdr;
-  gpiop->ODR     = config->odr;
-  gpiop->AFRL    = config->afrl;
-  gpiop->AFRH    = config->afrh;
-  gpiop->MODER   = config->moder;
-  gpiop->LOCKR   = config->lockr;
+//   gpiop->OTYPER  = config->otyper;
+//   gpiop->ASCR    = config->ascr;
+//   gpiop->OSPEEDR = config->ospeedr;
+//   gpiop->PUPDR   = config->pupdr;
+//   gpiop->ODR     = config->odr;
+//   gpiop->AFRL    = config->afrl;
+//   gpiop->AFRH    = config->afrh;
+//   gpiop->MODER   = config->moder;
+//   gpiop->LOCKR   = config->lockr;
 }
 
 /*===========================================================================*/
@@ -125,55 +125,55 @@ void _pal_lld_setgroupmode(ioportid_t port,
                            ioportmask_t mask,
                            iomode_t mode) {
 
-  uint32_t moder   = (mode & PAL_SN32_MODE_MASK) >> 0;
-  uint32_t otyper  = (mode & PAL_SN32_OTYPE_MASK) >> 2;
-  uint32_t ospeedr = (mode & PAL_SN32_OSPEED_MASK) >> 3;
-  uint32_t pupdr   = (mode & PAL_SN32_PUPDR_MASK) >> 5;
-  uint32_t altr    = (mode & PAL_SN32_ALTERNATE_MASK) >> 7;
-  uint32_t ascr    = (mode & PAL_SN32_ASCR_MASK) >> 11;
-  uint32_t lockr   = (mode & PAL_SN32_LOCKR_MASK) >> 12;
-  uint32_t bit     = 0;
-  while (true) {
-    if ((mask & 1) != 0) {
-      uint32_t altrmask, m1, m2, m4;
+//   uint32_t moder   = (mode & PAL_SN32_MODE_MASK) >> 0;
+//   uint32_t otyper  = (mode & PAL_SN32_OTYPE_MASK) >> 2;
+//   uint32_t ospeedr = (mode & PAL_SN32_OSPEED_MASK) >> 3;
+//   uint32_t pupdr   = (mode & PAL_SN32_PUPDR_MASK) >> 5;
+//   uint32_t altr    = (mode & PAL_SN32_ALTERNATE_MASK) >> 7;
+//   uint32_t ascr    = (mode & PAL_SN32_ASCR_MASK) >> 11;
+//   uint32_t lockr   = (mode & PAL_SN32_LOCKR_MASK) >> 12;
+//   uint32_t bit     = 0;
+//   while (true) {
+//     if ((mask & 1) != 0) {
+//       uint32_t altrmask, m1, m2, m4;
 
-      altrmask = altr << ((bit & 7) * 4);
-      m1 = 1 << bit;
-      m2 = 3 << (bit * 2);
-      m4 = 15 << ((bit & 7) * 4);
-      port->OTYPER  = (port->OTYPER & ~m1) | otyper;
-      port->ASCR    = (port->ASCR & ~m1) | ascr;
-      port->OSPEEDR = (port->OSPEEDR & ~m2) | ospeedr;
-      port->PUPDR   = (port->PUPDR & ~m2) | pupdr;
-       if ((mode & PAL_SN32_MODE_MASK) == PAL_SN32_MODE_ALTERNATE) {
-        /* If going in alternate mode then the alternate number is set
-           before switching mode in order to avoid glitches.*/
-        if (bit < 8)
-          port->AFRL = (port->AFRL & ~m4) | altrmask;
-        else
-          port->AFRH = (port->AFRH & ~m4) | altrmask;
-        port->MODER   = (port->MODER & ~m2) | moder;
-      }
-      else {
-        /* If going into a non-alternate mode then the mode is switched
-           before setting the alternate mode in order to avoid glitches.*/
-        port->MODER   = (port->MODER & ~m2) | moder;
-        if (bit < 8)
-          port->AFRL = (port->AFRL & ~m4) | altrmask;
-        else
-          port->AFRH = (port->AFRH & ~m4) | altrmask;
-      }
-      port->LOCKR   = (port->LOCKR & ~m1) | lockr;
-    }
-    mask >>= 1;
-    if (!mask)
-      return;
-    otyper <<= 1;
-    ospeedr <<= 2;
-    pupdr <<= 2;
-    moder <<= 2;
-    bit++;
-  }
+//       altrmask = altr << ((bit & 7) * 4);
+//       m1 = 1 << bit;
+//       m2 = 3 << (bit * 2);
+//       m4 = 15 << ((bit & 7) * 4);
+//       port->OTYPER  = (port->OTYPER & ~m1) | otyper;
+//       port->ASCR    = (port->ASCR & ~m1) | ascr;
+//       port->OSPEEDR = (port->OSPEEDR & ~m2) | ospeedr;
+//       port->PUPDR   = (port->PUPDR & ~m2) | pupdr;
+//        if ((mode & PAL_SN32_MODE_MASK) == PAL_SN32_MODE_ALTERNATE) {
+//         /* If going in alternate mode then the alternate number is set
+//            before switching mode in order to avoid glitches.*/
+//         if (bit < 8)
+//           port->AFRL = (port->AFRL & ~m4) | altrmask;
+//         else
+//           port->AFRH = (port->AFRH & ~m4) | altrmask;
+//         port->MODER   = (port->MODER & ~m2) | moder;
+//       }
+//       else {
+//         /* If going into a non-alternate mode then the mode is switched
+//            before setting the alternate mode in order to avoid glitches.*/
+//         port->MODER   = (port->MODER & ~m2) | moder;
+//         if (bit < 8)
+//           port->AFRL = (port->AFRL & ~m4) | altrmask;
+//         else
+//           port->AFRH = (port->AFRH & ~m4) | altrmask;
+//       }
+//       port->LOCKR   = (port->LOCKR & ~m1) | lockr;
+//     }
+//     mask >>= 1;
+//     if (!mask)
+//       return;
+//     otyper <<= 1;
+//     ospeedr <<= 2;
+//     pupdr <<= 2;
+//     moder <<= 2;
+//     bit++;
+//   }
 }
 
 #endif /* HAL_USE_PAL */

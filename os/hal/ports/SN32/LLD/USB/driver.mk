@@ -8,7 +8,7 @@ endif
 
 PLATFORMSRC += $(CHIBIOS)/os/hal/ports/SN32/LLD/USB/hidram.c
 PLATFORMSRC += $(CHIBIOS)/os/hal/ports/SN32/LLD/USB/hiduser.c
-# PLATFORMSRC += $(CHIBIOS)/os/hal/ports/SN32/LLD/USB/usbdesc.c
+PLATFORMSRC += $(CHIBIOS)/os/hal/ports/SN32/LLD/USB/usbdesc.c
 PLATFORMSRC += $(CHIBIOS)/os/hal/ports/SN32/LLD/USB/usbepfunc.c
 PLATFORMSRC += $(CHIBIOS)/os/hal/ports/SN32/LLD/USB/usbhw.c
 PLATFORMSRC += $(CHIBIOS)/os/hal/ports/SN32/LLD/USB/usbram.c

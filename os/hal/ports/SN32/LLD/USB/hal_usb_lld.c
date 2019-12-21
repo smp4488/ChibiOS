@@ -23,7 +23,10 @@
  */
 
 #include "hal.h"
+#include "usb.h"
 #include "usbhw.h"
+#include "usbsystem.h"
+#include "usbuser.h"
 
 #if (HAL_USE_USB == TRUE) || defined(__DOXYGEN__)
 
@@ -101,6 +104,7 @@ void usb_lld_init(void) {
 
   /* Driver initialization.*/
   usbObjectInit(&USBD1);
+  USB_SystemInit();
 }
 
 /**
@@ -116,14 +120,16 @@ void usb_lld_start(USBDriver *usbp) {
     /* Enables the peripheral.*/
 #if PLATFORM_USB_USE_USB1 == TRUE
     if (&USBD1 == usbp) {
-        // SN_USB->EP0CTL->ENDP_CNT
+        USB_Init();
+        /* USB clock enabled.*/
+        // rccEnableUSB(FALSE);
+        // SN_USB->EP0CTL->ENDP_CNT = 0x0001;
         nvicEnableVector(USB_IRQn, 14);
     }
 #endif
-    usb_lld_reset(usbp);
+    // usb_lld_reset(usbp);
   }
   /* Configures the peripheral.*/
-  USB_Init();
 }
 
 /**
@@ -141,7 +147,9 @@ void usb_lld_stop(USBDriver *usbp) {
     /* Disables the peripheral.*/
 #if PLATFORM_USB_USE_USB1 == TRUE
     if (&USBD1 == usbp) {
-
+        nvicDisableVector(USB_IRQn);
+        // STM32_USB->CNTR = CNTR_PDWN | CNTR_FRES;
+        // rccDisableUSB(FALSE);
     }
 #endif
   }
@@ -157,6 +165,7 @@ void usb_lld_stop(USBDriver *usbp) {
 void usb_lld_reset(USBDriver *usbp) {
 
   /* Post reset initialization.*/
+  USB_ResetEvent();
 
   /* EP0 initialization.*/
   usbp->epc[0] = &ep0config;
@@ -172,8 +181,8 @@ void usb_lld_reset(USBDriver *usbp) {
  */
 void usb_lld_set_address(USBDriver *usbp) {
 
-  (void)usbp;
-
+//   STM32_USB->DADDR = (uint32_t)(usbp->address) | DADDR_EF;
+  __USB_SETADDRESS(usbp->address);
 }
 
 /**
@@ -186,9 +195,9 @@ void usb_lld_set_address(USBDriver *usbp) {
  */
 void usb_lld_init_endpoint(USBDriver *usbp, usbep_t ep) {
 
-  (void)usbp;
-  (void)ep;
-
+//   (void)usbp;
+//   (void)ep;
+    USB_EP0SetupEvent();
 }
 
 /**
@@ -199,9 +208,15 @@ void usb_lld_init_endpoint(USBDriver *usbp, usbep_t ep) {
  * @notapi
  */
 void usb_lld_disable_endpoints(USBDriver *usbp) {
+  unsigned i;
 
-  (void)usbp;
+  /* Resets the packet memory allocator.*/
+//   usb_pm_reset(usbp);
 
+  /* Disabling all endpoints.*/
+  for (i = USB_EP1; i <= USB_EP6; i++) {
+    USB_EPnDisable(i);              // Disable EP1~EP6
+  }
 }
 
 /**
@@ -219,9 +234,14 @@ void usb_lld_disable_endpoints(USBDriver *usbp) {
 usbepstatus_t usb_lld_get_status_out(USBDriver *usbp, usbep_t ep) {
 
   (void)usbp;
-  (void)ep;
-
-  return EP_STATUS_DISABLED;
+  switch (SN_USB->INSTS) {
+      case mskEP0_IN:
+          return EP_STATUS_DISABLED;
+      case mskEP0_IN_STALL:
+          return EP_STATUS_STALLED;
+      default:
+          return EP_STATUS_ACTIVE;
+  }
 }
 
 /**
@@ -239,9 +259,14 @@ usbepstatus_t usb_lld_get_status_out(USBDriver *usbp, usbep_t ep) {
 usbepstatus_t usb_lld_get_status_in(USBDriver *usbp, usbep_t ep) {
 
   (void)usbp;
-  (void)ep;
-
-  return EP_STATUS_DISABLED;
+  switch (SN_USB->INSTS) {
+    case mskEP0_OUT:
+      return EP_STATUS_DISABLED;
+    case mskEP0_OUT_STALL:
+      return EP_STATUS_STALLED;
+    default:
+      return EP_STATUS_ACTIVE;
+  }
 }
 
 /**
