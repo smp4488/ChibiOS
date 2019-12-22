@@ -92,13 +92,13 @@ void USB_SystemInit (void)
 	}
 	#endif
 
-	#if (USB_SYS0_CLKCFG_VAL == USB_PLL)
-	{
-		while ((SN_SYS0->CSST & 0x40) != 0x40);
-    SN_SYS0->CLKCFG = 0x4;					   //CLK switch PLL
-		while ((SN_SYS0->CLKCFG & 0x70) != 0x40);
-	}
-	#endif
+	// #if (USB_SYS0_CLKCFG_VAL == USB_PLL)
+	// {
+	// 	// while ((SN_SYS0->CSST & 0x40) != 0x40);
+    //     SN_SYS0->CLKCFG = 0x4;					   //CLK switch PLL
+	// 	// while ((SN_SYS0->CLKCFG & 0x70) != 0x40);
+	// }
+	// #endif
 	SN_SYS0->AHBCP = USB_AHB_PRESCALAR;
 	#if (USB_CLKOUT_SEL_VAL > 0)			//CLKOUT
 	SN_SYS1->AHBCLKEN |= (USB_CLKOUT_SEL_VAL<<28);

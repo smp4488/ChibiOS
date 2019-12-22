@@ -123,7 +123,8 @@ const uint8_t HID_ReportDescriptor[] = {
 	HID_EndCollection,											// end collection
 #endif
 };
-const uint16_t HID_ReportDescSize = sizeof(HID_ReportDescriptor);
+// const uint16_t HID_ReportDescSize = sizeof(HID_ReportDescriptor);
+#define HID_ReportDescSize sizeof(HID_ReportDescriptor)
 
 /*****************************************************************************
 * Description	: HID_ReportDescriptor2[]
@@ -221,7 +222,8 @@ const uint8_t HID_ReportDescriptor2[] = {
 	HID_EndCollection,											// end collection
 #endif
 };
-const uint16_t HID_ReportDescSize2 = sizeof(HID_ReportDescriptor2);
+// const uint16_t HID_ReportDescSize2 = sizeof(HID_ReportDescriptor2);
+#define HID_ReportDescSize2 sizeof(HID_ReportDescSize2)
 
 /*****************************************************************************
 * Description	: HID_ReportDescriptor3[]
@@ -300,7 +302,8 @@ const uint8_t HID_ReportDescriptor3[] = {
 	HID_Input(HID_Data|HID_Variable|HID_Absolute),	// input (data, variable, absolute)
 	HID_EndCollection,											// end collection
 };
-const uint16_t HID_ReportDescSize3 = sizeof(HID_ReportDescriptor3);
+// const uint16_t HID_ReportDescSize3 = sizeof(HID_ReportDescriptor3);
+#define HID_ReportDescSize3 sizeof(HID_ReportDescSize3)
 
 #if (USB_LIBRARY_TYPE == USB_KB_MOUSE_TYPE1)
 #define nUsb_TotalLength	(USB_CONFIGUARTION_DESC_SIZE+USB_INTERFACE_DESC_SIZE*3+USB_HID_DESC_SIZE*3+USB_ENDPOINT_DESC_SIZE*3)

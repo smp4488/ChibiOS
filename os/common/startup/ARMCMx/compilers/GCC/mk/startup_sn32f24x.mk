@@ -1,6 +1,7 @@
 # List of the ChibiOS generic SN32F24x startup and CMSIS files.
 STARTUPSRC = $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/crt1.c \
-             $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/vectors.c
+             $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/vectors.c \
+			 $(CHIBIOS)/os/common/ext/CMSIS/SN/SN32F24x/system_SN32F240.c
 
 STARTUPASM = $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/crt0_v6m.S
 # STARTUPASM = $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/startup_SN32F240.s

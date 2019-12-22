@@ -219,18 +219,18 @@ void USB_Init	(void)
 	USB_StandardVar_Init();
 	USB_HidVar_Init();
 
-	/* Initialize clock and Enable USB PHY. */
-	USB_SystemInit();																// enable System,PLL,EHS XTAL by user setting
-	SN_SYS1->AHBCLKEN |= 0x02;									// Enable USBCLKEN
-	__USB_PHY_ENABLE;			// enable ESD_EN & PHY_EN
+	// /* Initialize clock and Enable USB PHY. */
+	// USB_SystemInit();																// enable System,PLL,EHS XTAL by user setting
+	// SN_SYS1->AHBCLKEN |= 0x02;									// Enable USBCLKEN
+	// __USB_PHY_ENABLE;			// enable ESD_EN & PHY_EN
 
 	/* Initialize USB  EP1~EP6 RAM address base on 64-bytes. */
-	USB_EPnBufferOffset(1,EP1_BUFFER_OFFSET_VALUE);
-	USB_EPnBufferOffset(2,EP2_BUFFER_OFFSET_VALUE);
-	USB_EPnBufferOffset(3,EP3_BUFFER_OFFSET_VALUE);
-	USB_EPnBufferOffset(4,EP4_BUFFER_OFFSET_VALUE);
-	USB_EPnBufferOffset(5,EP5_BUFFER_OFFSET_VALUE);
-	USB_EPnBufferOffset(6,EP6_BUFFER_OFFSET_VALUE);
+	// USB_EPnBufferOffset(1,EP1_BUFFER_OFFSET_VALUE);
+	// USB_EPnBufferOffset(2,EP2_BUFFER_OFFSET_VALUE);
+	// USB_EPnBufferOffset(3,EP3_BUFFER_OFFSET_VALUE);
+	// USB_EPnBufferOffset(4,EP4_BUFFER_OFFSET_VALUE);
+	// USB_EPnBufferOffset(5,EP5_BUFFER_OFFSET_VALUE);
+	// USB_EPnBufferOffset(6,EP6_BUFFER_OFFSET_VALUE);
 
 	/* Initialize EP1~EP6 RAM point address to array(wUSB_EPnOffset).*/
 	pRam = &wUSB_EPnOffset[0];

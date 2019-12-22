@@ -34,7 +34,7 @@
 /**
  * @brief   Maximum endpoint address.
  */
-#define USB_MAX_ENDPOINTS                   4
+#define USB_MAX_ENDPOINTS                   5
 
 /**
  * @brief   Status stage handling method.
@@ -65,7 +65,7 @@
  * @note    The default is @p FALSE.
  */
 #if !defined(PLATFORM_USB_USE_USB1) || defined(__DOXYGEN__)
-#define PLATFORM_USB_USE_USB1                  FALSE
+#define PLATFORM_USB_USE_USB1                  TRUE
 #endif
 /** @} */
 

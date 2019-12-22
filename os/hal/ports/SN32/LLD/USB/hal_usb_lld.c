@@ -104,7 +104,7 @@ void usb_lld_init(void) {
 
   /* Driver initialization.*/
   usbObjectInit(&USBD1);
-  USB_SystemInit();
+  USB_Init();
 }
 
 /**
@@ -120,7 +120,7 @@ void usb_lld_start(USBDriver *usbp) {
     /* Enables the peripheral.*/
 #if PLATFORM_USB_USE_USB1 == TRUE
     if (&USBD1 == usbp) {
-        USB_Init();
+
         /* USB clock enabled.*/
         // rccEnableUSB(FALSE);
         // SN_USB->EP0CTL->ENDP_CNT = 0x0001;
@@ -197,7 +197,7 @@ void usb_lld_init_endpoint(USBDriver *usbp, usbep_t ep) {
 
 //   (void)usbp;
 //   (void)ep;
-    USB_EP0SetupEvent();
+    // USB_EP0SetupEvent();
 }
 
 /**
