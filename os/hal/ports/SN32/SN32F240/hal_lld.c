@@ -57,7 +57,7 @@
  * @special
  */
 void sn32_clock_init(void) {
-//   SystemInit();
+  SystemInit();
 }
 
 /**
@@ -66,11 +66,7 @@ void sn32_clock_init(void) {
  * @notapi
  */
 void hal_lld_init(void) {
-	// //Release the status of all GPIO pins.
-	// SN_PMU->LATCHCTRL2=0x5A5A0001;
-	// while (SN_PMU->LATCHST == 0x1);
-	// SN_PMU->LATCHCTRL2 = 0x5A5A0000;
-	// SN_PMU->LATCHCTRL1 = 0x5A5A0000;
+
 }
 
 /** @} */

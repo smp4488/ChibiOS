@@ -29,13 +29,13 @@
 /* Driver constants.                                                         */
 /*===========================================================================*/
 
-#include "sn32_registry.h"
+// #include "sn32_registry.h"
 
 /**
  * @name    Platform identification macros
  * @{
  */
-#define PLATFORM_NAME           "templates"
+#define PLATFORM_NAME           "SN32F240x"
 /** @} */
 
 /*===========================================================================*/
@@ -73,8 +73,6 @@
 
 /* Various helpers.*/
 #include "nvic.h"
-#include "sn32_isr.h"
-#include "sn32_rcc.h"
 
 #ifdef __cplusplus
 extern "C" {

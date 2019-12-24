@@ -27,12 +27,21 @@
 #include "usbhw.h"
 #include "usbsystem.h"
 #include "usbuser.h"
+#include "usbepfunc.h"
+#include "usbram.h"
 
 #if (HAL_USE_USB == TRUE) || defined(__DOXYGEN__)
 
 /*===========================================================================*/
 /* Driver local definitions.                                                 */
 /*===========================================================================*/
+
+OSAL_IRQ_HANDLER(Vector44) {
+    OSAL_IRQ_PROLOGUE();
+    // serve_usb_irq(&USBD1);
+    USB_IRQHandler();
+    OSAL_IRQ_EPILOGUE();
+}
 
 /*===========================================================================*/
 /* Driver exported variables.                                                */
@@ -48,6 +57,8 @@ USBDriver USBD1;
 /*===========================================================================*/
 /* Driver local variables and types.                                         */
 /*===========================================================================*/
+
+uint8_t *const usbd_sram = (uint8_t *)(SN_USB_BASE + 0x100);
 
 /**
  * @brief   EP0 state.
@@ -65,6 +76,8 @@ static union {
   USBOutEndpointState out;
 } ep0_state;
 
+static uint8_t ep0setup_buffer[8];
+
 /**
  * @brief   EP0 initialization structure.
  */
@@ -76,7 +89,9 @@ static const USBEndpointConfig ep0config = {
   0x40,
   0x40,
   &ep0_state.in,
-  &ep0_state.out
+  &ep0_state.out,
+  2,
+  ep0setup_buffer
 };
 
 /*===========================================================================*/
@@ -104,7 +119,7 @@ void usb_lld_init(void) {
 
   /* Driver initialization.*/
   usbObjectInit(&USBD1);
-  USB_Init();
+//   USB_Init();
 }
 
 /**
@@ -124,7 +139,8 @@ void usb_lld_start(USBDriver *usbp) {
         /* USB clock enabled.*/
         // rccEnableUSB(FALSE);
         // SN_USB->EP0CTL->ENDP_CNT = 0x0001;
-        nvicEnableVector(USB_IRQn, 14);
+        USB_Init();
+        // nvicEnableVector(USB_IRQn, 14);
     }
 #endif
     // usb_lld_reset(usbp);
@@ -194,10 +210,11 @@ void usb_lld_set_address(USBDriver *usbp) {
  * @notapi
  */
 void usb_lld_init_endpoint(USBDriver *usbp, usbep_t ep) {
+//   const USBEndpointConfig *epcp = usbp->epc[ep];
 
-//   (void)usbp;
-//   (void)ep;
-    // USB_EP0SetupEvent();
+  (void)usbp;
+  (void)ep;
+  USB_EP0SetupEvent();
 }
 
 /**
@@ -242,6 +259,7 @@ usbepstatus_t usb_lld_get_status_out(USBDriver *usbp, usbep_t ep) {
       default:
           return EP_STATUS_ACTIVE;
   }
+//   return EP_STATUS_DISABLED;
 }
 
 /**
@@ -267,6 +285,7 @@ usbepstatus_t usb_lld_get_status_in(USBDriver *usbp, usbep_t ep) {
     default:
       return EP_STATUS_ACTIVE;
   }
+//   return EP_STATUS_DISABLED;
 }
 
 /**
@@ -287,7 +306,13 @@ void usb_lld_read_setup(USBDriver *usbp, usbep_t ep, uint8_t *buf) {
 
   (void)usbp;
   (void)ep;
-  (void)buf;
+  int i;
+  for (i = 0; i < 8; i++) {
+    *buf = usbd_sram[i];
+    //*buf = ep0setup_buffer[i];
+    ep0setup_buffer[i] = usbd_sram[i];
+    buf += 1;
+  }
 
 }
 
@@ -331,9 +356,22 @@ void usb_lld_prepare_transmit(USBDriver *usbp, usbep_t ep) {
  */
 void usb_lld_start_out(USBDriver *usbp, usbep_t ep) {
 
-  (void)usbp;
-  (void)ep;
+//   (void)usbp;
+//   (void)ep;
 
+//   uint32_t rxcnt;
+//   USBOutEndpointState *oesp = usbp->epc[ep]->out_state;
+//   if (oesp->rxsize > usbp->epc[ep]->out_maxsize) {
+//     rxcnt = usbp->epc[ep]->out_maxsize;
+//   }
+//   else {
+//     rxcnt = oesp->rxsize;
+//   }
+//   USB_EPnWriteByteData(ep, );
+  //   _toggle_dsq(oesp->hwEp, &(oesp->dsq));
+  //   USBD->EP[oesp->hwEp].MXPLD = rxcnt;
+  // USB_EPnReadByteData(ep, )
+    // &wUSB_EPnOffset[ep] = rxcnt;
 }
 
 /**
@@ -349,6 +387,22 @@ void usb_lld_start_in(USBDriver *usbp, usbep_t ep) {
   (void)usbp;
   (void)ep;
 
+  uint32_t i, txcnt;
+  USBInEndpointState *iesp = usbp->epc[ep]->in_state;
+  if (iesp->txsize > usbp->epc[ep]->in_maxsize) {
+    txcnt = usbp->epc[ep]->in_maxsize;
+  }
+  else {
+    txcnt = iesp->txsize;
+  }
+  for (i = 0; i < txcnt; i++) {
+    // usbd_sram[(USBD->EP[iesp->hwEp].BUFSEG) + i] = iesp->txbuf[i];
+    // usbd_sram[(SN_USB->EP1BUFOS->OFFSET) + i] = iesp->txbuf[i];
+    USB_EPnReadByteData(ep, i);
+  }
+//   _toggle_dsq(iesp->hwEp, &(iesp->dsq));
+//   USBD->EP[iesp->hwEp].MXPLD = txcnt;
+//   &wUSB_EPnOffset[ep - 1] = txcnt;
 }
 
 /**

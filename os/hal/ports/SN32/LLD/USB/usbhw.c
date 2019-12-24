@@ -27,7 +27,7 @@
 * Return		: None
 * Note			: None
 *****************************************************************************/
-void USB_IRQHandler (void)
+void USB_IRQHandler(void)
 {
 	uint32_t iwIntFlag;
 	iwIntFlag = SN_USB->INSTS;		/* Get Interrupt Status and clear immediately. */
@@ -115,7 +115,7 @@ void USB_IRQHandler (void)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void USB_EP1AckEvent (void)
+void USB_EP1AckEvent(void)
 {
 	__USB_CLRINSTS(mskEP1_ACK);
 }
@@ -128,7 +128,7 @@ void USB_EP1AckEvent (void)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void USB_EP2AckEvent (void)
+void USB_EP2AckEvent(void)
 {
 	__USB_CLRINSTS(mskEP2_ACK);
 }
@@ -141,7 +141,7 @@ void USB_EP2AckEvent (void)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void USB_EP3AckEvent (void)
+void USB_EP3AckEvent(void)
 {
 	__USB_CLRINSTS(mskEP3_ACK);
 }
@@ -154,7 +154,7 @@ void USB_EP3AckEvent (void)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void USB_EP4AckEvent (void)
+void USB_EP4AckEvent(void)
 {
 	__USB_CLRINSTS(mskEP4_ACK);
 }
@@ -167,7 +167,7 @@ void USB_EP4AckEvent (void)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void USB_EP5AckEvent (void)
+void USB_EP5AckEvent(void)
 {
 	__USB_CLRINSTS(mskEP5_ACK);
 }
@@ -179,7 +179,7 @@ void USB_EP5AckEvent (void)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void USB_EP6AckEvent (void)
+void USB_EP6AckEvent(void)
 {
 	__USB_CLRINSTS(mskEP6_ACK);
 }
@@ -193,7 +193,7 @@ void USB_EP6AckEvent (void)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void USB_ClrEPnToggle	(uint32_t	hwEPNum)
+void USB_ClrEPnToggle(uint32_t hwEPNum)
 {
 	SN_USB->EPTOGGLE &= ~(0x1<<hwEPNum);
 }
@@ -212,25 +212,25 @@ void USB_ClrEPnToggle	(uint32_t	hwEPNum)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void USB_Init	(void)
+void USB_Init(void)
 {
 	volatile uint32_t	*pRam;
 	uint32_t 	wTmp, i;
 	USB_StandardVar_Init();
 	USB_HidVar_Init();
 
-	// /* Initialize clock and Enable USB PHY. */
-	// USB_SystemInit();																// enable System,PLL,EHS XTAL by user setting
-	// SN_SYS1->AHBCLKEN |= 0x02;									// Enable USBCLKEN
-	// __USB_PHY_ENABLE;			// enable ESD_EN & PHY_EN
+	/* Initialize clock and Enable USB PHY. */
+	USB_SystemInit();																// enable System,PLL,EHS XTAL by user setting
+	SN_SYS1->AHBCLKEN |= 0x02;									// Enable USBCLKEN
+	__USB_PHY_ENABLE;			// enable ESD_EN & PHY_EN
 
 	/* Initialize USB  EP1~EP6 RAM address base on 64-bytes. */
-	// USB_EPnBufferOffset(1,EP1_BUFFER_OFFSET_VALUE);
-	// USB_EPnBufferOffset(2,EP2_BUFFER_OFFSET_VALUE);
-	// USB_EPnBufferOffset(3,EP3_BUFFER_OFFSET_VALUE);
-	// USB_EPnBufferOffset(4,EP4_BUFFER_OFFSET_VALUE);
-	// USB_EPnBufferOffset(5,EP5_BUFFER_OFFSET_VALUE);
-	// USB_EPnBufferOffset(6,EP6_BUFFER_OFFSET_VALUE);
+	USB_EPnBufferOffset(1,EP1_BUFFER_OFFSET_VALUE);
+	USB_EPnBufferOffset(2,EP2_BUFFER_OFFSET_VALUE);
+	USB_EPnBufferOffset(3,EP3_BUFFER_OFFSET_VALUE);
+	USB_EPnBufferOffset(4,EP4_BUFFER_OFFSET_VALUE);
+	USB_EPnBufferOffset(5,EP5_BUFFER_OFFSET_VALUE);
+	USB_EPnBufferOffset(6,EP6_BUFFER_OFFSET_VALUE);
 
 	/* Initialize EP1~EP6 RAM point address to array(wUSB_EPnOffset).*/
 	pRam = &wUSB_EPnOffset[0];
@@ -335,7 +335,7 @@ void USB_EPnNak (uint32_t	wEPNum)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void USB_EPnAck (uint32_t	wEPNum, uint8_t	bBytecnt)
+void USB_EPnAck(uint32_t wEPNum, uint8_t bBytecnt)
 {
 	volatile	uint32_t	*pEPn_ptr;
 	if (wEPNum > USB_EP6)
@@ -354,7 +354,7 @@ void USB_EPnAck (uint32_t	wEPNum, uint8_t	bBytecnt)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void USB_EPnStall (uint32_t	wEPNum)
+void USB_EPnStall(uint32_t wEPNum)
 {
 	volatile uint32_t	*pEPn_ptr;
 	if(wEPNum > USB_EP6)				//wEPNum != EP0~EP6
@@ -442,7 +442,7 @@ void USB_RemoteWakeUp()
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void	USB_DelayJstate()
+void USB_DelayJstate()
 {
 	uint32_t	i;
 	for (i=0; i<300; i++);	// delay 180us
@@ -456,7 +456,7 @@ void	USB_DelayJstate()
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void	USB_DelayKstate()
+void USB_DelayKstate()
 {
 	uint32_t	i;
 	for (i=0; i < K_STATE_DELAY; i++);	// require delay 1ms ~ 15ms
@@ -472,7 +472,7 @@ void	USB_DelayKstate()
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void	USB_EPnBufferOffset(uint32_t	wEPNum, uint32_t	wAddr)
+void USB_EPnBufferOffset(uint32_t	wEPNum, uint32_t	wAddr)
 {
 	volatile	uint32_t	*pEPn_ptr;
 	if ((wEPNum > USB_EP0) && (wEPNum <= USB_EP6))	//wEPNum = EP1 ~ EP6
@@ -491,7 +491,7 @@ void	USB_EPnBufferOffset(uint32_t	wEPNum, uint32_t	wAddr)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-uint32_t	USB_EPnReadByteData(uint32_t	wEPNum, uint32_t	wByteIndex)
+uint32_t USB_EPnReadByteData(uint32_t wEPNum, uint32_t wByteIndex)
 {
 	uint32_t	*pUsbSram, wVal;
 	if (wByteIndex < 64)				// 0~63 Byte index
@@ -512,7 +512,7 @@ uint32_t	USB_EPnReadByteData(uint32_t	wEPNum, uint32_t	wByteIndex)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-uint32_t	USB_EPnReadWordData(uint32_t	wEPNum, uint32_t	wWordIndex)
+uint32_t USB_EPnReadWordData(uint32_t wEPNum, uint32_t wWordIndex)
 {
 	uint32_t	*pUsbSram;
 	if (wWordIndex < 16)				// 0~15 Word index
@@ -533,7 +533,7 @@ uint32_t	USB_EPnReadWordData(uint32_t	wEPNum, uint32_t	wWordIndex)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void	USB_EPnWriteByteData(uint32_t	wEPNum, uint32_t	wByteindex, uint32_t	wBytedata)
+void USB_EPnWriteByteData(uint32_t wEPNum, uint32_t wByteindex, uint32_t wBytedata)
 {
 	uint32_t	*pUsbSram;
 	if (wByteindex < 64)				// 0~63 Byte index
@@ -554,7 +554,7 @@ void	USB_EPnWriteByteData(uint32_t	wEPNum, uint32_t	wByteindex, uint32_t	wByteda
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void	USB_EPnWriteWordData(uint32_t	wEPNum, uint32_t	wWordindex, uint32_t	wWorddata)
+void USB_EPnWriteWordData(uint32_t wEPNum, uint32_t	wWordindex, uint32_t wWorddata)
 {
 	uint32_t	*pUsbSram;
 	if (wWordindex < 16)				// 0~15 Word index

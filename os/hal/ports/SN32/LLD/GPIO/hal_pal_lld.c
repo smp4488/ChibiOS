@@ -50,18 +50,18 @@
 /* Driver local functions.                                                   */
 /*===========================================================================*/
 
-static void initgpio(sn32_gpio_t *gpiop, const sn32_gpio_setup_t *config) {
+// static void initgpio(sn32_gpio_t *gpiop, const sn32_gpio_setup_t *config) {
 
-//   gpiop->OTYPER  = config->otyper;
-//   gpiop->ASCR    = config->ascr;
-//   gpiop->OSPEEDR = config->ospeedr;
-//   gpiop->PUPDR   = config->pupdr;
-//   gpiop->ODR     = config->odr;
-//   gpiop->AFRL    = config->afrl;
-//   gpiop->AFRH    = config->afrh;
-//   gpiop->MODER   = config->moder;
-//   gpiop->LOCKR   = config->lockr;
-}
+//     //   gpiop->OTYPER  = config->otyper;
+//     //   gpiop->ASCR    = config->ascr;
+//     //   gpiop->OSPEEDR = config->ospeedr;
+//     //   gpiop->PUPDR   = config->pupdr;
+//     //   gpiop->ODR     = config->odr;
+//     //   gpiop->AFRL    = config->afrl;
+//     //   gpiop->AFRH    = config->afrh;
+//     //   gpiop->MODER   = config->moder;
+//     //   gpiop->LOCKR   = config->lockr;
+// }
 
 /*===========================================================================*/
 /* Driver interrupt handlers.                                                */
@@ -82,15 +82,9 @@ static void initgpio(sn32_gpio_t *gpiop, const sn32_gpio_setup_t *config) {
 void _pal_lld_init(const PALConfig *config) {
 
   /*
-   * Enables the GPIO related clocks.
-   */
-#if defined(SN32L4XX)
-  RCC->AHB2ENR |= AHB2_EN_MASK;
-#endif
-
-  /*
    * Initial GPIO setup.
    */
+
 #if SN32_HAS_GPIOA
   initgpio(GPIOA, &config->PAData);
 #endif

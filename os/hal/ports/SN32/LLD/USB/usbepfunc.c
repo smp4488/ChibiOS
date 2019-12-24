@@ -13,7 +13,7 @@
 #include	"usb.h"
 #include	"usbhw.h"
 #include	"usbram.h"
-// #include	"usbdesc.h"
+#include	"usbdesc.h"
 #include	"usbepfunc.h"
 
 #include	"hid.h"
@@ -24,15 +24,14 @@
 * Function		: USB_EPnINFunction
 * Description	: SET EP1~EP6 IN token RAM
 * Input				: 1. wEPNum: EP1~EP6
-*								2. pData: transaction Data buffer
-*								3. wBytecnt: Byte conuter Number of transaction
+*					  2. pData: transaction Data buffer
+*					  3. wBytecnt: Byte conuter Number of transaction
 * Output			: None
 * Return			: by EPn_RETURN_VALUE
 * Note				: None
 *****************************************************************************/
-uint32_t	USB_EPnINFunction(uint32_t	wEPNum, uint32_t	*pData, uint32_t	wBytecnt)
+uint32_t USB_EPnINFunction(uint32_t	wEPNum, uint32_t *pData, uint32_t wBytecnt)
 {
-
 	volatile	uint32_t	*pUsbReg;
 	uint32_t	wLoop;
 	pUsbReg = (&SN_USB->EP0CTL) + wEPNum;
@@ -58,7 +57,7 @@ uint32_t	USB_EPnINFunction(uint32_t	wEPNum, uint32_t	*pData, uint32_t	wBytecnt)
 			{
 				*(pUsbReg+wLoop) = *(pData+wLoop);
 			}
-			USB_Test();				//return Mouse data
+			// USB_Test();				//return Mouse data
 			USB_EPnAck(wEPNum,wBytecnt);	// ACK hwByteCnt byte
 			return EPn_RETURN_ACK_OK;
 		}
@@ -82,7 +81,7 @@ uint32_t	USB_EPnINFunction(uint32_t	wEPNum, uint32_t	*pData, uint32_t	wBytecnt)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void	USB_Test()
+void USB_Test()
 {
 	switch (mode)
 	{
