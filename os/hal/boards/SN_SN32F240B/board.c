@@ -28,22 +28,18 @@
  *          This variable is used by the HAL when initializing the PAL driver.
  */
 const PALConfig pal_default_config = {
-#if STM32_HAS_GPIOA
-  {VAL_GPIOA_MODER, VAL_GPIOA_OTYPER, VAL_GPIOA_OSPEEDR, VAL_GPIOA_PUPDR,
-   VAL_GPIOA_ODR,   VAL_GPIOA_AFRL,   VAL_GPIOA_AFRH},
-#endif
-#if STM32_HAS_GPIOB
-  {VAL_GPIOB_MODER, VAL_GPIOB_OTYPER, VAL_GPIOB_OSPEEDR, VAL_GPIOB_PUPDR,
-   VAL_GPIOB_ODR,   VAL_GPIOB_AFRL,   VAL_GPIOB_AFRH},
-#endif
-#if STM32_HAS_GPIOC
-  {VAL_GPIOC_MODER, VAL_GPIOC_OTYPER, VAL_GPIOC_OSPEEDR, VAL_GPIOC_PUPDR,
-   VAL_GPIOC_ODR,   VAL_GPIOC_AFRL,   VAL_GPIOC_AFRH},
-#endif
-#if STM32_HAS_GPIOD
-  {VAL_GPIOD_MODER, VAL_GPIOD_OTYPER, VAL_GPIOD_OSPEEDR, VAL_GPIOD_PUPDR,
-   VAL_GPIOD_ODR,   VAL_GPIOD_AFRL,   VAL_GPIOD_AFRH},
-#endif
+  #if STM32_HAS_GPIOA
+  {VAL_GPIOA_MODER},
+  #endif
+  #if STM32_HAS_GPIOB
+  {VAL_GPIOB_MODER},
+  #endif
+  #if STM32_HAS_GPIOC
+  {VAL_GPIOC_MODER},
+  #endif
+  #if STM32_HAS_GPIOD
+  {VAL_GPIOD_MODER},
+  #endif
 };
 #endif
 
@@ -54,11 +50,27 @@ static int flag __attribute__((section(".flag"))) __attribute__((__used__)) = 0x
  * @details This initialization must be performed just after stack setup
  *          and before any other initialization.
  */
-void __early_init(void) { sn32_clock_init(); }
+void __early_init(void) {
+  sn32_clock_init();
+}
 
 
 /**
  * @brief   Board-specific initialization code.
  * @todo    Add your board-specific code, if any.
  */
-void boardInit(void) {}
+void boardInit(void) {
+  // setP0.0~P0.1, P0.6~P0.7, P0.10~P0.15 to input pull-up
+  SN_GPIO0->CFG = 0x000A0AA0;
+  // set P1.2~1.9, P1.12~P1.15 to input pull-up
+  SN_GPIO1->CFG = 0x00A0000A;
+  // set P2.4~P2.15 to input pull-up
+  SN_GPIO2->CFG = 0x000000AA;
+  // set P3.0~P3.1, P3.4~P3.8 to input pull-up
+  SN_GPIO3->CFG = 0xAAA800A0;
+
+  SN_GPIO0->MODE = 0xffff;
+  SN_GPIO2->CFG  = 0x00;  // Enable P2 internal pull-up resistor
+  SN_GPIO2->MODE = 0xFFFF;
+  SN_GPIO2->DATA = 0x0000;
+}

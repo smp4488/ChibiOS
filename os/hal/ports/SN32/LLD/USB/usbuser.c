@@ -235,7 +235,7 @@ void USB_EP0InEvent(void)
 void USB_EP0OutEvent(void)
 {
 	uint32_t i;
-	volatile uint32_t	*pUsbSram = &USB_SRAM_EP0_W0;
+	// volatile uint32_t	*pUsbSram = &USB_SRAM_EP0_W0;
 
 	__USB_CLRINSTS(mskEP0_OUT);								// Clear ENDP0_OUT = 0
 
@@ -243,8 +243,8 @@ void USB_EP0OutEvent(void)
 	{		// Read only the first 8 byte data to check whether matach RETURN_KERNEL pattern
 		for(i=0; i<16 ; i++)
 		{
-			sHID_Data.wHID_Setreportfeature[i] = *pUsbSram;
-			pUsbSram++;
+			// sHID_Data.wHID_Setreportfeature[i] = *pUsbSram;
+			// pUsbSram++;
 		}
 		sHID_Data.wHID_SetReportFeature = mskSET_REPROTFEATURE_ARRIVAL;
 
@@ -252,7 +252,7 @@ void USB_EP0OutEvent(void)
 	else if (sHID_Data.wHID_Status & mskSET_REPORT_FLAG)		// Check Set_report_flag == 1
 	{
 		sHID_Data.wHID_Status &= ~mskSET_REPORT_FLAG;		// Clear Set_report_flag = 0
-		sHID_Data.wHID_SetRptByte[0] = USB_SRAM_EP0_W0; // save data
+		// sHID_Data.wHID_SetRptByte[0] = USB_SRAM_EP0_W0; // save data
 		sHID_Data.wHID_Status |= mskSET_REPORT_DONE;		// Ser Set_report_done = 1
 	}
 	if (!(sUSB_EumeData.wUSB_Status & mskSETUP_OUT))			// Check Setup_OUT == 0

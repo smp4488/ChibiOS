@@ -140,7 +140,7 @@ void usb_lld_start(USBDriver *usbp) {
         // rccEnableUSB(FALSE);
         // SN_USB->EP0CTL->ENDP_CNT = 0x0001;
         USB_Init();
-        // nvicEnableVector(USB_IRQn, 14);
+        nvicEnableVector(USB_IRQn, 14);
     }
 #endif
     // usb_lld_reset(usbp);
@@ -181,7 +181,7 @@ void usb_lld_stop(USBDriver *usbp) {
 void usb_lld_reset(USBDriver *usbp) {
 
   /* Post reset initialization.*/
-  USB_ResetEvent();
+//   USB_ResetEvent();
 
   /* EP0 initialization.*/
   usbp->epc[0] = &ep0config;
@@ -214,7 +214,6 @@ void usb_lld_init_endpoint(USBDriver *usbp, usbep_t ep) {
 
   (void)usbp;
   (void)ep;
-  USB_EP0SetupEvent();
 }
 
 /**

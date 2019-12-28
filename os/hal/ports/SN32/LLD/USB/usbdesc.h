@@ -14,7 +14,7 @@
 * Description	: USB_LIBRARY_TYPE SELECTION
 *****************************************************************************/
 #define USB_KB_MOUSE_TYPE1				1	// KB+Mouse(EP1 Standard + EP2 Mouse + EP3 hot key)
-#define USB_MOUSE_TYPE						2	// Mouse(EP1)
+#define USB_MOUSE_TYPE					2	// Mouse(EP1)
 #define USB_KB_MOUSE_TYPE2				3	// KB+Mouse(EP1 Standard + EP2 Mouse/Consumer page)
 #define USB_LIBRARY_TYPE				USB_KB_MOUSE_TYPE2
 

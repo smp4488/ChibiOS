@@ -57,7 +57,7 @@
  * @special
  */
 void sn32_clock_init(void) {
-  SystemInit();
+
 }
 
 /**
@@ -66,7 +66,8 @@ void sn32_clock_init(void) {
  * @notapi
  */
 void hal_lld_init(void) {
-
+  SystemInit();
+  SystemCoreClockUpdate();
 }
 
 /** @} */

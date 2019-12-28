@@ -216,13 +216,14 @@ void USB_Init(void)
 {
 	volatile uint32_t	*pRam;
 	uint32_t 	wTmp, i;
-	USB_StandardVar_Init();
+
+    USB_StandardVar_Init();
 	USB_HidVar_Init();
 
 	/* Initialize clock and Enable USB PHY. */
 	USB_SystemInit();																// enable System,PLL,EHS XTAL by user setting
-	SN_SYS1->AHBCLKEN |= 0x02;									// Enable USBCLKEN
-	__USB_PHY_ENABLE;			// enable ESD_EN & PHY_EN
+    SN_SYS1->AHBCLKEN |= 0x02;                                                       // Enable USBCLKEN
+    __USB_PHY_ENABLE;			// enable ESD_EN & PHY_EN
 
 	/* Initialize USB  EP1~EP6 RAM address base on 64-bytes. */
 	USB_EPnBufferOffset(1,EP1_BUFFER_OFFSET_VALUE);
@@ -230,7 +231,7 @@ void USB_Init(void)
 	USB_EPnBufferOffset(3,EP3_BUFFER_OFFSET_VALUE);
 	USB_EPnBufferOffset(4,EP4_BUFFER_OFFSET_VALUE);
 	USB_EPnBufferOffset(5,EP5_BUFFER_OFFSET_VALUE);
-	USB_EPnBufferOffset(6,EP6_BUFFER_OFFSET_VALUE);
+	// USB_EPnBufferOffset(6,EP6_BUFFER_OFFSET_VALUE);
 
 	/* Initialize EP1~EP6 RAM point address to array(wUSB_EPnOffset).*/
 	pRam = &wUSB_EPnOffset[0];
@@ -239,7 +240,7 @@ void USB_Init(void)
 	*(pRam+2) = (uint32_t)(&USB_SRAM_EP0_W0) + EP3_BUFFER_OFFSET_VALUE;
 	*(pRam+3) = (uint32_t)(&USB_SRAM_EP0_W0) + EP4_BUFFER_OFFSET_VALUE;
 	*(pRam+4) = (uint32_t)(&USB_SRAM_EP0_W0) + EP5_BUFFER_OFFSET_VALUE;
-	*(pRam+5) = (uint32_t)(&USB_SRAM_EP0_W0) + EP6_BUFFER_OFFSET_VALUE;
+	// *(pRam+5) = (uint32_t)(&USB_SRAM_EP0_W0) + EP6_BUFFER_OFFSET_VALUE;
 
 	/* Initialize EP1~EP6 package size to array(wUSB_EPnPacketsize).*/
 	pRam = &wUSB_EPnPacketsize[0];
@@ -249,7 +250,7 @@ void USB_Init(void)
 	*(pRam+3) = USB_EP3_PACKET_SIZE;
 	*(pRam+4) = USB_EP4_PACKET_SIZE;
 	*(pRam+5) = USB_EP5_PACKET_SIZE;
-	*(pRam+6) = USB_EP6_PACKET_SIZE;
+	// *(pRam+6) = USB_EP6_PACKET_SIZE;
 
 	/* Enable the USB Interrupt */
 	SN_USB->INTEN = (mskBUS_IE|mskUSB_IE);
@@ -458,8 +459,8 @@ void USB_DelayJstate()
 *****************************************************************************/
 void USB_DelayKstate()
 {
-	uint32_t	i;
-	for (i=0; i < K_STATE_DELAY; i++);	// require delay 1ms ~ 15ms
+	// uint32_t	i;
+	// for (i=0; i < K_STATE_DELAY; i++);	// require delay 1ms ~ 15ms
 }
 
 
@@ -472,7 +473,7 @@ void USB_DelayKstate()
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void USB_EPnBufferOffset(uint32_t	wEPNum, uint32_t	wAddr)
+void USB_EPnBufferOffset(uint32_t wEPNum, uint32_t wAddr)
 {
 	volatile	uint32_t	*pEPn_ptr;
 	if ((wEPNum > USB_EP0) && (wEPNum <= USB_EP6))	//wEPNum = EP1 ~ EP6

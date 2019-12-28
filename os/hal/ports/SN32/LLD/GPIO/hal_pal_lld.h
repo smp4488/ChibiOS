@@ -154,6 +154,11 @@
 #define GPIOB                           ((sn32_gpio_t *)SN_GPIO1_BASE)
 #define GPIOC                           ((sn32_gpio_t *)SN_GPIO2_BASE)
 #define GPIOD                           ((sn32_gpio_t *)SN_GPIO3_BASE)
+
+// #define GPIOA                           ((SN_GPIO0_Type*)          SN_GPIO0_BASE)
+// #define GPIOB                           ((SN_GPIO0_Type*)          SN_GPIO1_BASE)
+// #define GPIOC                           ((SN_GPIO0_Type*)          SN_GPIO2_BASE)
+// #define GPIOD                           ((SN_GPIO3_Type*)          SN_GPIO3_BASE)
 /** @} */
 
 /*===========================================================================*/

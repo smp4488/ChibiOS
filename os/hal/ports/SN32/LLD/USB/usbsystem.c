@@ -22,28 +22,28 @@ void USB_SystemInit (void)
 #if (USB_SYS_CLOCK_SETUP)
 
 	#if (USB_SYS0_CLKCFG_VAL == USB_IHRC)			//IHRC
-	SN_SYS0->ANBCTRL |= USB_IHRC_EN;					//enable IHRC
-	while ((SN_SYS0->CSST & 0x01) != 0x01);		//check IHRC ready
-	SN_SYS0->CLKCFG = 0x00;								//switch IHRC
-	while ((SN_SYS0->CLKCFG & 0x70) != 0x00);
+        SN_SYS0->ANBCTRL |= USB_IHRC_EN;					//enable IHRC
+        while ((SN_SYS0->CSST & 0x01) != 0x01);		//check IHRC ready
+        SN_SYS0->CLKCFG = 0x00;								//switch IHRC
+        while ((SN_SYS0->CLKCFG & 0x70) != 0x00);
 	#endif
 
 	#if (USB_SYS0_CLKCFG_VAL == USB_ILRC)			//ILRC
-	SN_SYS0->CLKCFG = 0x1;
-  while ((SN_SYS0->CLKCFG & 0x70) != 0x10);		//switch ILRC
+	    SN_SYS0->CLKCFG = 0x1;
+        while ((SN_SYS0->CLKCFG & 0x70) != 0x10);		//switch ILRC
 	#endif
 
 	#if (USB_SYS0_CLKCFG_VAL == USB_EHSXTAL)	//EHS XTAL
-	#if (USB_EHS_FREQ > 12)
-	SN_SYS0->ANBCTRL |= (1<<5);		//Enable XTAL > 12MHz
-	#else
-	SN_SYS0->ANBCTRL &=~(1<<5);		//Enable XTAL <= 12MHz
-	#endif
+        #if (USB_EHS_FREQ > 12)
+        SN_SYS0->ANBCTRL |= (1<<5);		//Enable XTAL > 12MHz
+        #else
+        SN_SYS0->ANBCTRL &=~(1<<5);		//Enable XTAL <= 12MHz
+        #endif
 
-	SN_SYS0->ANBCTRL |= (1<<4);		//Enable XTAL
-	while ((SN_SYS0->CSST & 0x10) != 0x10);
-	SN_SYS0->CLKCFG = 0x02;								//switch XTAL
-	while ((SN_SYS0->CLKCFG & 0x70) != 0X20);
+        SN_SYS0->ANBCTRL |= (1<<4);		//Enable XTAL
+        while ((SN_SYS0->CSST & 0x10) != 0x10);
+        SN_SYS0->CLKCFG = 0x02;								//switch XTAL
+        while ((SN_SYS0->CLKCFG & 0x70) != 0X20);
 	#endif
 #endif
 
@@ -51,8 +51,9 @@ void USB_SystemInit (void)
 	// SN_SYS0->PLLCTRL = USB_SYS0_PLLCTRL_EN;			//ENABLE PLL
 	if(USB_PLL_CLKIN == 0x0)		//PLL clk source is IHRC
 	{
-		SN_SYS0->ANBCTRL |= USB_IHRC_EN;					//enable IHRC
-		// SN_SYS0->PLLCTRL |= USB_PLL_CLKSOURCE_IHRC;
+		// SN_SYS0->ANBCTRL |= USB_IHRC_EN;					//enable IHRC
+        SN_SYS0->ANBCTRL_b.IHRCEN = 0x1;
+        // SN_SYS0->PLLCTRL |= USB_PLL_CLKSOURCE_IHRC;
 	}
 	else	//PLL clk source is XTAL
 	{

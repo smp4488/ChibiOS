@@ -30,14 +30,6 @@
 /* Driver local definitions.                                                 */
 /*===========================================================================*/
 
-#if defined(SN32F240B)
-#define AHB2_EN_MASK    SN32_GPIO_EN_MASK
-#define AHB2_LPEN_MASK  0
-
-#else
-#error "missing or unsupported platform for GPIOv3 PAL driver"
-#endif
-
 /*===========================================================================*/
 /* Driver exported variables.                                                */
 /*===========================================================================*/
@@ -50,18 +42,18 @@
 /* Driver local functions.                                                   */
 /*===========================================================================*/
 
-// static void initgpio(sn32_gpio_t *gpiop, const sn32_gpio_setup_t *config) {
+static void initgpio(sn32_gpio_t *gpiop, const sn32_gpio_setup_t *config) {
 
-//     //   gpiop->OTYPER  = config->otyper;
-//     //   gpiop->ASCR    = config->ascr;
-//     //   gpiop->OSPEEDR = config->ospeedr;
-//     //   gpiop->PUPDR   = config->pupdr;
-//     //   gpiop->ODR     = config->odr;
-//     //   gpiop->AFRL    = config->afrl;
-//     //   gpiop->AFRH    = config->afrh;
-//     //   gpiop->MODER   = config->moder;
-//     //   gpiop->LOCKR   = config->lockr;
-// }
+    //   gpiop->OTYPER  = config->otyper;
+    //   gpiop->ASCR    = config->ascr;
+    //   gpiop->OSPEEDR = config->ospeedr;
+    //   gpiop->PUPDR   = config->pupdr;
+    //   gpiop->ODR     = config->odr;
+    //   gpiop->AFRL    = config->afrl;
+    //   gpiop->AFRH    = config->afrh;
+    gpiop->MODER   = config->moder;
+    //   gpiop->LOCKR   = config->lockr;
+}
 
 /*===========================================================================*/
 /* Driver interrupt handlers.                                                */
@@ -73,7 +65,7 @@
 
 /**
  * @brief   SN32 I/O ports configuration.
- * @details Ports A-D(E, F, G, H) clocks enabled.
+ * @details Ports A-D clocks enabled.
  *
  * @param[in] config    the SN32 ports configuration
  *
@@ -97,9 +89,7 @@ void _pal_lld_init(const PALConfig *config) {
 #if SN32_HAS_GPIOD
   initgpio(GPIOD, &config->PDData);
 #endif
-#if SN32_HAS_GPIOE
-  initgpio(GPIOE, &config->PEData);
-#endif
+
 }
 
 /**

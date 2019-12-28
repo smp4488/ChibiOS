@@ -162,26 +162,26 @@ void SystemInit (void)
 
 	#if SYS0_CLKCFG_VAL == IHRC48			//IHRC=48MHz
 
-	SN_FLASH->LPCTRL = 0x5AFA0004;
-	SN_FLASH->LPCTRL = 0x5AFA0005;
+        SN_FLASH->LPCTRL = 0x5AFA0004;
+        SN_FLASH->LPCTRL = 0x5AFA0005;
 
-	SN_SYS0->ANBCTRL = 0x1;
-	while ((SN_SYS0->CSST & 0x1) != 0x1);
-	SN_SYS0->CLKCFG = 0x0;
-	while ((SN_SYS0->CLKCFG & 0x70) != 0x0);
+        SN_SYS0->ANBCTRL = 0x1;
+        while ((SN_SYS0->CSST & 0x1) != 0x1);
+        SN_SYS0->CLKCFG = 0x0;
+        while ((SN_SYS0->CLKCFG & 0x70) != 0x0);
 	#endif
 
-	#if SYS0_CLKCFG_VAL == ILRC			//ILRC ON
-	SN_FLASH->LPCTRL = 0x5AFA0000;
-	SN_SYS0->CLKCFG = 0x1;
-	while ((SN_SYS0->CLKCFG & 0x70) != 0x10);
+        #if SYS0_CLKCFG_VAL == ILRC			//ILRC ON
+        SN_FLASH->LPCTRL = 0x5AFA0000;
+        SN_SYS0->CLKCFG = 0x1;
+        while ((SN_SYS0->CLKCFG & 0x70) != 0x10);
 	#endif
 
 	SN_SYS0->AHBCP_b.AHBPRE = AHB_PRESCALAR;
 
 	#if (CLKOUT_SEL_VAL > 0)			//CLKOUT
-	SN_SYS1->AHBCLKEN_b.CLKOUTSEL = CLKOUT_SEL_VAL;
-	SN_SYS1->APBCP1_b.CLKOUTPRE = CLKOUT_PRESCALAR;
+        SN_SYS1->AHBCLKEN_b.CLKOUTSEL = CLKOUT_SEL_VAL;
+        SN_SYS1->APBCP1_b.CLKOUTPRE = CLKOUT_PRESCALAR;
 	#endif
 #endif //(SYS_CLOCK_SETUP)
 

@@ -21,7 +21,7 @@
 #define USB_EP3_DIRECTION					1					// IN = 1; OUT = 0
 #define USB_EP4_DIRECTION					1					// IN = 1; OUT = 0
 #define USB_EP5_DIRECTION					1					// IN = 1; OUT = 0
-#define USB_EP6_DIRECTION					1					// IN = 1; OUT = 0
+#define USB_EP6_DIRECTION					0					// IN = 1; OUT = 0
 
 /* EP1~EP6 Transfer mode define */
 #define USB_INTERRUPT_MODE				0					// INTERRUPT Transfer
