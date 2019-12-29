@@ -14,9 +14,9 @@
 volatile	uint32_t	wUSB_EPnOffset[6];
 volatile	uint32_t	wUSB_EPnPacketsize[7];
 volatile	uint8_t		wUSB_EndpHalt[7];
-const	uint8_t	*pUSB_TableIndex;
+const	    uint8_t	    *pUSB_TableIndex;
 volatile	uint32_t	wUSB_TableLength;
-volatile	uint8_t	wUSB_IfAlternateSet[6];
+volatile	uint8_t	    wUSB_IfAlternateSet[6];
 
 uint16_t	mode;
 uint16_t	cnt;

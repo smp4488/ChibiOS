@@ -473,7 +473,7 @@ void	USB_ClearFeatureEvent(void)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void	USB_SetFeatureEvent(void)
+void USB_SetFeatureEvent(void)
 {
 	uint32_t	wCmdtype = sUSB_EumeData.bUSB_bmRequestType & USB_ENDPOINT_NUM;
 	uint32_t	wEPNum;
@@ -531,7 +531,7 @@ void	USB_SetFeatureEvent(void)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void	USB_SetAddressEvent(void)
+void USB_SetAddressEvent(void)
 {
 	sUSB_EumeData.wUSB_Status &= ~mskSETADDRESS;						// Clear SetAddress = 0
 	sUSB_EumeData.wUSB_Status |= mskSETADDRESSCMD;					// Set SetAddressCmd = 1
@@ -551,7 +551,7 @@ void	USB_SetAddressEvent(void)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void	USB_GetDescriptorEvent(void)
+void USB_GetDescriptorEvent(void)
 {
 		uint32_t 	unsupport, i;
 		unsupport = GET_DESCRIPTOR_STALL;
@@ -584,7 +584,7 @@ void	USB_GetDescriptorEvent(void)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void	USB_SetDescriptorEvent(void)
+void USB_SetDescriptorEvent(void)
 {
 	USB_EPnStall(USB_EP0);							// EP0 STALL
 }
@@ -597,7 +597,7 @@ void	USB_SetDescriptorEvent(void)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void	USB_GetConfigurationEvent(void)
+void USB_GetConfigurationEvent(void)
 {
 	uint32_t	i;
 	USB_SRAM_EP0_W0 = sUSB_EumeData.wUSB_SetConfiguration;
@@ -628,7 +628,7 @@ void	USB_GetConfigurationEvent(void)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void	USB_SetConfigurationEvent(void)
+void USB_SetConfigurationEvent(void)
 {
 	uint32_t	i;
 	volatile uint8_t	*pUsbRam;
@@ -685,7 +685,7 @@ void	USB_SetConfigurationEvent(void)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void	USB_GetInterfaceEvent(void)
+void USB_GetInterfaceEvent(void)
 {
 	//uint32_t	*pUsbRam;
 	if (sUSB_EumeData.wUSB_SetConfiguration == USB_CONFIG_VALUE)
@@ -719,7 +719,7 @@ void	USB_GetInterfaceEvent(void)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-void	USB_SetInterfaceEvent(void)
+void USB_SetInterfaceEvent(void)
 {
 	uint32_t	i;
 	volatile 	uint8_t		*pUsbRam;
@@ -836,7 +836,7 @@ void USB_StandardVar_Init(void)
 * Return			: None
 * Note				: None
 *****************************************************************************/
-uint32_t	USB_Comb_Bytetoword	(uint8_t	data0, uint8_t	data1, uint8_t	data2, uint8_t	data3)
+uint32_t USB_Comb_Bytetoword	(uint8_t	data0, uint8_t	data1, uint8_t	data2, uint8_t	data3)
 {
 	uint32_t	data;
 	data = ((((uint32_t)data3<<24)&((uint32_t)0xFF<<24)) | ((data2<<16)&(0xFF<<16)) | ((data1<<8)&(0xFF<<8)) | (data0&0xFF));

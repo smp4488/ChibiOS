@@ -29,7 +29,7 @@
 *****************************************************************************/
 void USB_IRQHandler(void)
 {
-	uint32_t iwIntFlag;
+    uint32_t iwIntFlag;
 	iwIntFlag = SN_USB->INSTS;		/* Get Interrupt Status and clear immediately. */
 
 	if (iwIntFlag & mskBUS_WAKEUP)
@@ -77,7 +77,7 @@ void USB_IRQHandler(void)
 			USB_EPnStall(USB_EP0);
 		}
 	}
-	else if (iwIntFlag & (mskEP6_ACK|mskEP5_ACK|mskEP4_ACK|mskEP3_ACK|mskEP2_ACK|mskEP1_ACK))
+	else if (iwIntFlag & (mskEP4_ACK|mskEP3_ACK|mskEP2_ACK|mskEP1_ACK))
 	{
 		if (iwIntFlag & mskEP1_ACK)
 		{									/* EP1 ACK */
@@ -222,7 +222,8 @@ void USB_Init(void)
 
 	/* Initialize clock and Enable USB PHY. */
 	USB_SystemInit();																// enable System,PLL,EHS XTAL by user setting
-    SN_SYS1->AHBCLKEN |= 0x02;                                                       // Enable USBCLKEN
+    // SN_SYS1->AHBCLKEN |= 0x02;                                                       // Enable USBCLKEN
+    SN_SYS1->AHBCLKEN |= (0x1 << 4);
     __USB_PHY_ENABLE;			// enable ESD_EN & PHY_EN
 
 	/* Initialize USB  EP1~EP6 RAM address base on 64-bytes. */
@@ -252,41 +253,45 @@ void USB_Init(void)
 	*(pRam+5) = USB_EP5_PACKET_SIZE;
 	// *(pRam+6) = USB_EP6_PACKET_SIZE;
 
-	/* Enable the USB Interrupt */
+    /* Enable the USB Interrupt */
 	SN_USB->INTEN = (mskBUS_IE|mskUSB_IE);
-	/* BUS_DRVEN = 0, BUS_DP = 1, BUS_DN = 0 */
+    // SN_USB->INTEN = (0xF << 28);
+    /* BUS_DRVEN = 0, BUS_DP = 1, BUS_DN = 0 */
 	SN_USB->SGCTL = mskBUS_J_STATE;
-	/* VREG33_EN = 1, PHY_EN = 1, DPPU_EN = 1, SIE_EN = 1, USBRAM_EN = 1, FLTDET_PUEN = 1 */
-	wTmp = (mskVREG33_EN|mskPHY_EN|mskDPPU_EN|mskSIE_EN|mskESD_EN|mskUSBRAM_EN|mskVREG33DIS_EN|mskFLTDET_PUEN_DISABLE);
+    /* VREG33_EN = 1, PHY_EN = 1, DPPU_EN = 1, SIE_EN = 1, USBRAM_EN = 1, FLTDET_PUEN = 1 */
+	// wTmp = (mskVREG33_EN|mskPHY_EN|mskDPPU_EN|mskSIE_EN|mskESD_EN|mskUSBRAM_EN|mskVREG33DIS_EN|mskFLTDET_PUEN_DISABLE);
+    wTmp = (mskVREG33_EN|mskPHY_EN|mskDPPU_EN|mskSIE_EN|mskESD_EN|mskVREG33DIS_EN|mskFLTDET_PUEN_DISABLE);
 
-	/*	setting EP1~EP6 Direction	*/
-#if (USB_EP1_DIRECTION == USB_DIRECTION_OUT)
-	wTmp |= mskEP1_DIR;
-#endif
-#if (USB_EP2_DIRECTION == USB_DIRECTION_OUT)
-	wTmp |= mskEP2_DIR;
-#endif
-#if (USB_EP3_DIRECTION == USB_DIRECTION_OUT)
-	wTmp |= mskEP3_DIR;
-#endif
-#if (USB_EP4_DIRECTION == USB_DIRECTION_OUT)
-	wTmp |= mskEP4_DIR;
-#endif
-#if (USB_EP5_DIRECTION == USB_DIRECTION_OUT)
-	wTmp |= mskEP5_DIR;
-#endif
-#if (USB_EP6_DIRECTION == USB_DIRECTION_OUT)
-	wTmp |= mskEP6_DIR;
-#endif
+    /*	setting EP1~EP6 Direction	*/
+    #if (USB_EP1_DIRECTION == USB_DIRECTION_OUT)
+        wTmp |= mskEP1_DIR;
+    #endif
+    #if (USB_EP2_DIRECTION == USB_DIRECTION_OUT)
+        wTmp |= mskEP2_DIR;
+    #endif
+    #if (USB_EP3_DIRECTION == USB_DIRECTION_OUT)
+        wTmp |= mskEP3_DIR;
+    #endif
+    #if (USB_EP4_DIRECTION == USB_DIRECTION_OUT)
+        wTmp |= mskEP4_DIR;
+    #endif
+    #if (USB_EP5_DIRECTION == USB_DIRECTION_OUT)
+        wTmp |= mskEP5_DIR;
+    #endif
+    #if (USB_EP6_DIRECTION == USB_DIRECTION_OUT)
+        wTmp |= mskEP6_DIR;
+    #endif
 
 	//!!NEVER REMOVE!!!
  	SN_USB->CFG = wTmp;
 	for (i = 0; i < DISCHARE_DELAY; i++);
+    // wait_ms((USB_PLL_DLEYA_TIME/4)*(USB_AHB_PRESCALAR+1));
 	SN_USB->CFG = (wTmp&(~mskVREG33DIS_EN))|mskDPPU_EN;
 	//!!NEVER REMOVE!!!
 
 	SN_USB->PHYPRM = (0x01U<<31);
-	NVIC_EnableIRQ(USB_IRQn);
+    NVIC_ClearPendingIRQ(USB_IRQn);
+    NVIC_EnableIRQ(USB_IRQn);
 	//NVIC_DisableIRQ(USB_IRQn);
 	return;
 }
@@ -459,8 +464,8 @@ void USB_DelayJstate()
 *****************************************************************************/
 void USB_DelayKstate()
 {
-	// uint32_t	i;
-	// for (i=0; i < K_STATE_DELAY; i++);	// require delay 1ms ~ 15ms
+	uint32_t	i;
+	for (i=0; i < K_STATE_DELAY; i++);	// require delay 1ms ~ 15ms
 }
 
 

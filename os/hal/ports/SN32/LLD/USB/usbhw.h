@@ -21,10 +21,11 @@
 	#define	mskEP3_NAK_EN				(0x1<<2)
 	#define mskEP4_NAK_EN				(0x1<<3)
 	#define mskEP5_NAK_EN				(0x1<<4)
-	#define	mskEP6_NAK_EN				(0x1<<5)
-	#define mskUSB_IE						(0x1<<29)
+	// #define	mskEP6_NAK_EN				(0x1<<5)
+    #define mskUSB_BUSWK_IE             (0x1<<28)
+	#define mskUSB_IE					(0x1<<29)
 	#define mskUSB_SOF_IE				(0x1<<30)
-	#define	mskBUS_IE						(0x1U<<31)
+	#define	mskBUS_IE					(0x1<<31)
 
 	/* USB Interrupt Event Status Bit Definitions <USB_INSTS/USB_INSTSC> */
 	#define mskEP1_NAK					(0x1<<0)
@@ -32,25 +33,25 @@
 	#define mskEP3_NAK					(0x1<<2)
 	#define mskEP4_NAK					(0x1<<3)
 	#define mskEP5_NAK					(0x1<<4)
-	#define mskEP6_NAK					(0x1<<5)
+	// #define mskEP6_NAK					(0x1<<5)
 	#define mskEP1_ACK					(0x1<<8)
 	#define mskEP2_ACK					(0x1<<9)
 	#define mskEP3_ACK					(0x1<<10)
 	#define mskEP4_ACK					(0x1<<11)
 	#define mskEP5_ACK					(0x1<<12)
 	#define mskEP6_ACK					(0x1<<13)
-	#define mskERR_TIMEOUT			(0x1<<17)
+	// #define mskERR_TIMEOUT			    (0x1<<17)
 	#define mskERR_SETUP				(0x1<<18)
-	#define mskEP0_OUT_STALL		(0x1<<19)
-	#define mskEP0_IN_STALL			(0x1<<20)
+	#define mskEP0_OUT_STALL		    (0x1<<19)
+	#define mskEP0_IN_STALL			    (0x1<<20)
 	#define	mskEP0_OUT					(0x1<<21)
-	#define mskEP0_IN						(0x1<<22)
+	#define mskEP0_IN					(0x1<<22)
 	#define mskEP0_SETUP				(0x1<<23)
-	#define mskEP0_PRESETUP			(0x1<<24)
+	#define mskEP0_PRESETUP			    (0x1<<24)
 	#define mskBUS_WAKEUP				(0x1<<25)
 	#define	mskUSB_SOF					(0x1<<26)
 	#define mskBUS_RESUME				(0x1<<29)
-	#define mskBUS_SUSPEND			(0x1<<30)
+	#define mskBUS_SUSPEND			    (0x1<<30)
 	#define	mskBUS_RESET				(0x1U<<31)
 
 	/* USB Device Address Bit Definitions <USB_ADDR> */
@@ -62,23 +63,23 @@
 	#define mskEP3_DIR					(0x1<<2)
 	#define mskEP4_DIR					(0x1<<3)
 	#define mskEP5_DIR					(0x1<<4)
-	#define mskEP6_DIR					(0x1<<5)
+	// #define mskEP6_DIR					(0x1<<5)
 	#define mskEP2_ISO					(0x1<<9)
 	#define mskEP3_ISO					(0x1<<10)
 	#define mskEP4_ISO					(0x1<<11)
 	#define mskEP5_ISO					(0x1<<12)
-	#define mskEP6_ISO					(0x1<<13)
-	#define mskVREG33DIS_EN			(0x1<<24)
+	// #define mskEP6_ISO					(0x1<<13)
+	#define mskVREG33DIS_EN			    (0x1<<31)
 	#define	mskUSBRAM_EN				(0x1<<25)
-	#define mskFLTDET_PUEN_DISABLE	(0x1<<26)
-	#define mskESD_EN						(0x1<<27)
-	#define	mskSIE_EN						(0x1<<28)
+	#define mskFLTDET_PUEN_DISABLE	    (0x1<<26)
+	#define mskESD_EN					(0x1<<27)
+	#define	mskSIE_EN					(0x1<<28)
 	#define mskDPPU_EN				 	(0x1<<29)
-	#define mskPHY_EN						(0x1<<30)
+	#define mskPHY_EN					(0x1<<30)
 	#define	mskVREG33_EN				(0x1U<<31)
 
 	/* USB Signal Control Bit Definitions <USB_SGCTL> */
-	#define mskBUS_DRVEN					(0x1<<2)
+	#define mskBUS_DRVEN				(0x1<<2)
 	#define mskBUS_DPDN_STATE			(0x3<<0)
 	#define mskBUS_J_STATE				(0x2<<0)			// D+ = 1, D- = 0
 	#define mskBUS_K_STATE				(0x1<<0)			// D+ = 0, D- = 1
@@ -87,13 +88,13 @@
 	#define mskBUS_IDLE_STATE			mskBUS_J_STATE
 
 	/* USB Configuration Bit Definitions <USB_EPnCTL> */
-	#define mskEPn_CNT						(0x1FF<<0)
-	#define mskEP0_OUT_STALL_EN		(0x1<<27)
-	#define mskEP0_IN_STALL_EN		(0x1<<28)
+	#define mskEPn_CNT					(0x1FF<<0)
+	#define mskEP0_OUT_STALL_EN		    (0x1<<27)
+	#define mskEP0_IN_STALL_EN		    (0x1<<28)
 	#define mskEPn_ENDP_STATE			(0x3<<29)
-	#define mskEPn_ENDP_STATE_ACK	(0x1<<29)
-	#define mskEPn_ENDP_STATE_NAK	(0x0<<29)
-	#define mskEPn_ENDP_STATE_STALL	(0x3<<29)
+	#define mskEPn_ENDP_STATE_ACK	    (0x1<<29)
+	#define mskEPn_ENDP_STATE_NAK	    (0x0<<29)
+	#define mskEPn_ENDP_STATE_STALL	    (0x3<<29)
 	#define mskEPn_ENDP_EN				(0x1U<<31)
 
 	/* USB Endpoint Data Toggle Bit Definitions <USB_EPTOGGLE> */
@@ -114,24 +115,24 @@
 	#define PKT_LNGTH_MASK				0x000003FF
 
 	/* nUsb_Status Register Definitions */
-	#define	mskBUSRESET							(0x1<<0)
-	#define	mskBUSSUSPEND						(0x1<<1)
-	#define	mskBUSRESUME						(0x1<<2)
-	#define	mskREMOTEWAKEUP					(0x1<<3)
-	#define	mskSETCONFIGURATION0CMD	(0x1<<4)
-	#define	mskSETADDRESS						(0x1<<5)
-	#define	mskSETADDRESSCMD				(0x1<<6)
-	#define	mskREMOTE_WAKEUP				(0x1<<7)
+	#define	mskBUSRESET					(0x1<<0)
+	#define	mskBUSSUSPEND				(0x1<<1)
+	#define	mskBUSRESUME				(0x1<<2)
+	#define	mskREMOTEWAKEUP				(0x1<<3)
+	#define	mskSETCONFIGURATION0CMD	    (0x1<<4)
+	#define	mskSETADDRESS				(0x1<<5)
+	#define	mskSETADDRESSCMD			(0x1<<6)
+	#define	mskREMOTE_WAKEUP			(0x1<<7)
 	#define	mskDEV_FEATURE_CMD			(0x1<<8)
 	#define	mskSET_REPORT_FLAG			(0x1<<9)
-	#define	mskPROTOCOL_GET_REPORT	(0x1<<10)
+	#define	mskPROTOCOL_GET_REPORT	    (0x1<<10)
 	#define	mskPROTOCOL_SET_IDLE		(0x1<<11)
 	#define	mskPROTOCOL_ARRIVAL			(0x1<<12)
 	#define	mskSET_REPORT_DONE			(0x1<<13)
 	#define	mskNOT_8BYTE_ENDDING		(0x1<<14)
-	#define	mskSETUP_OUT						(0x1<<15)
-	#define	mskSETUP_IN							(0x1<<16)
-	#define	mskINITREPEAT						(0x1<<17)
+	#define	mskSETUP_OUT				(0x1<<15)
+	#define	mskSETUP_IN					(0x1<<16)
+	#define	mskINITREPEAT				(0x1<<17)
 
 
 	//ISP KERNEL MODE
@@ -145,13 +146,13 @@
 	//USB EP0_IN token set STALL
 	#define	__USB_EP0INSTALL_EN		(SN_USB->EP0CTL |= mskEP0_IN_STALL_EN)
 	//USB EP0_OUT token set STALL
-	#define	__USB_EP0OUTSTALL_EN		(SN_USB->EP0CTL |= mskEP0_OUT_STALL_EN)
+	#define	__USB_EP0OUTSTALL_EN	(SN_USB->EP0CTL |= mskEP0_OUT_STALL_EN)
 	//USB bus driver J state
 	#define	__USB_JSTATE_DRIVER		(SN_USB->SGCTL = (mskBUS_DRVEN|mskBUS_J_STATE))
 	//USB bus driver K state
 	#define	__USB_KSTATE_DRIVER		(SN_USB->SGCTL = (mskBUS_DRVEN|mskBUS_K_STATE))
 	//USB PHY set enable
-	#define	__USB_PHY_ENABLE			(SN_USB->CFG |= (mskESD_EN|mskPHY_EN))
+	#define	__USB_PHY_ENABLE		(SN_USB->CFG |= (mskESD_EN|mskPHY_EN))
 /***************************************/
 
 	/* USB SRAM */
